@@ -5,7 +5,6 @@ category: utility
 complexity: high
 mcp-servers: [sequential, serena, context7]
 personas: [analyzer, architect, devops, qa, refactorer]
-disable-model-invocation: true
 allowed-tools: Read, Grep, Glob, Bash(git *), Bash(wc *), Bash(find *), Bash(du *), TodoWrite, Task, Write
 argument-hint: "[target-path] [--pass surface|structural|cross-cutting|all] [--batch-size N] [--focus infrastructure|frontend|backend|all]"
 ---

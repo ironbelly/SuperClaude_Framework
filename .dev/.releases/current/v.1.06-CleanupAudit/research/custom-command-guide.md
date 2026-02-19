@@ -36,6 +36,29 @@ For complex commands, use BOTH:
 .claude/agents/<worker>.md    # Worker agents (subagents)
 ```
 
+### Command + Skill Hybrid (for slash-command registration)
+When using a Skill for supporting files, you **MUST ALSO** create a Command `.md`
+entry point in `src/superclaude/commands/`. The skill provides the orchestration
+engine; the command provides the `/sc:name` slash-command registration.
+
+```
+src/superclaude/commands/<name>.md    # Entry point (thin, ~70 lines)
+src/superclaude/skills/sc-<name>/     # Orchestration engine (full spec)
+├── SKILL.md
+├── rules/
+├── templates/
+└── scripts/
+src/superclaude/agents/<worker>.md    # Worker agents (if needed)
+```
+
+**Pattern**: Command = concise (frontmatter + usage + summary + examples + boundaries).
+Skill = comprehensive (full behavioral flow + MCP + tools + patterns + supporting files).
+Do NOT duplicate detailed behavioral content in both — the command references the skill,
+and the skill contains the full orchestration spec.
+
+**Reference implementation**: `cleanup-audit` (command: 93 lines, skill: 134 lines)
+**Anti-pattern**: `task-unified` (567-line command duplicating skill content)
+
 ---
 
 ## 2. Skill File Structure
@@ -342,15 +365,18 @@ When creating a new /sc:* command, update these framework files:
 
 ```
 1. Decide: Skill (complex) or Command (simple)?
-2. Create directory: .claude/skills/sc-<name>/
+2. If Skill: Create directory src/superclaude/skills/sc-<name>/
 3. Write SKILL.md following the 13-section template
 4. Add supporting files: rules/, templates/, scripts/
-5. Define custom subagents if needed: .claude/agents/<worker>.md
-6. Set frontmatter: name, description, category, complexity, mcp-servers, personas
-7. Set platform safety: allowed-tools, disable-model-invocation
-8. Design 5-step behavioral flow
-9. Define quality gates between phases
-10. Test with a small scope first
-11. Update framework integration files (COMMANDS.md, ORCHESTRATOR.md)
-12. Document in the command catalog
+5. Define custom subagents if needed: src/superclaude/agents/<worker>.md
+6. CRITICAL: Create thin command entry point at src/superclaude/commands/<name>.md
+   (frontmatter + usage + summary + examples + boundaries — ~70 lines)
+7. Set skill frontmatter: name, description, category, complexity, mcp-servers, personas, allowed-tools, argument-hint
+8. Set command frontmatter: name, description, category, complexity, mcp-servers, personas (NO skill-only fields)
+9. Design 5-step behavioral flow (in SKILL.md only, NOT in command)
+10. Define quality gates between phases
+11. Test with a small scope first
+12. Update framework integration files (COMMANDS.md, ORCHESTRATOR.md)
+13. Run `make sync-dev` and `make verify-sync` to validate
+14. Document in the command catalog
 ```

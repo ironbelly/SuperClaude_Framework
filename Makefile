@@ -127,9 +127,16 @@ sync-dev:
 		case "$$name" in README.md) continue;; esac; \
 		cp "$$agent" ".claude/agents/$$name"; \
 	done
+	@mkdir -p .claude/commands/sc
+	@for cmd in src/superclaude/commands/*.md; do \
+		name=$$(basename "$$cmd"); \
+		case "$$name" in README.md|__init__.py) continue;; esac; \
+		cp "$$cmd" ".claude/commands/sc/$$name"; \
+	done
 	@echo "✅ Sync complete."
-	@echo "   Skills: $$(ls -d .claude/skills/*/ 2>/dev/null | wc -l | tr -d ' ') directories"
-	@echo "   Agents: $$(ls .claude/agents/*.md 2>/dev/null | wc -l | tr -d ' ') files"
+	@echo "   Skills:   $$(ls -d .claude/skills/*/ 2>/dev/null | wc -l | tr -d ' ') directories"
+	@echo "   Agents:   $$(ls .claude/agents/*.md 2>/dev/null | wc -l | tr -d ' ') files"
+	@echo "   Commands: $$(ls .claude/commands/sc/*.md 2>/dev/null | wc -l | tr -d ' ') files"
 
 # Verify src/superclaude/ and .claude/ are in sync (CI-friendly, exits 1 on drift)
 verify-sync:
@@ -185,6 +192,32 @@ verify-sync:
 		case "$$name" in README.md) continue;; esac; \
 		if [ ! -f "src/superclaude/agents/$$name" ]; then \
 			echo "  ❌ MISSING in src/superclaude/agents/: $$name (not distributable!)"; \
+			drift=1; \
+		fi; \
+	done; \
+	echo ""; \
+	echo "=== Commands ==="; \
+	for cmd in src/superclaude/commands/*.md; do \
+		name=$$(basename "$$cmd"); \
+		case "$$name" in README.md) continue;; esac; \
+		if [ ! -f ".claude/commands/sc/$$name" ]; then \
+			echo "  ❌ MISSING in .claude/commands/sc/: $$name"; \
+			drift=1; \
+		else \
+			if ! diff -q "$$cmd" ".claude/commands/sc/$$name" > /dev/null 2>&1; then \
+				echo "  ⚠️  DIFFERS: $$name"; \
+				drift=1; \
+			else \
+				echo "  ✅ $$name"; \
+			fi; \
+		fi; \
+	done; \
+	for cmd in .claude/commands/sc/*.md; do \
+		[ -f "$$cmd" ] || continue; \
+		name=$$(basename "$$cmd"); \
+		case "$$name" in README.md) continue;; esac; \
+		if [ ! -f "src/superclaude/commands/$$name" ]; then \
+			echo "  ❌ MISSING in src/superclaude/commands/: $$name (not distributable!)"; \
 			drift=1; \
 		fi; \
 	done; \
