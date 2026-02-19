@@ -24,17 +24,18 @@ uv run python script.py          # Execute scripts
 # Claude Code Configuration (v4.2.0)
 .claude/
 ├── settings.json        # User settings
-└── commands/            # Slash commands (installed via `superclaude install`)
-    ├── pm.md
-    ├── research.md
-    └── index-repo.md
+├── commands/            # Slash commands (installed via `superclaude install`)
+├── agents/              # Agent definitions (installed via `superclaude install`)
+└── skills/              # Skills (installed via `superclaude install`)
 
 # Python Package
 src/superclaude/         # Pytest plugin + CLI tools
 ├── pytest_plugin.py     # Auto-loaded pytest integration
 ├── pm_agent/            # confidence.py, self_check.py, reflexion.py
 ├── execution/           # parallel.py, reflection.py, self_correction.py
-└── cli/                 # main.py, doctor.py, install_skill.py
+├── cli/                 # main.py, doctor.py, install_skill.py, install_agents.py, install_skills.py
+├── agents/              # Agent definition source files (.md)
+└── skills/              # Skill packages (SKILL.md + rules/ + templates/ + scripts/)
 
 # Project Files
 tests/                   # Python test suite
@@ -247,13 +248,19 @@ superclaude mcp  # Interactive install, gateway is default (requires Docker)
 ```bash
 # Option 1: pipx (recommended)
 pipx install superclaude
-superclaude install
+superclaude install        # Installs: core files → commands → agents → skills
 
 # Option 2: Direct from repo
 git clone https://github.com/SuperClaude-Org/SuperClaude_Framework.git
 cd SuperClaude_Framework
 ./install.sh
 ```
+
+**`superclaude install` installs 4 component types**:
+1. Core framework files (`.md`) → `~/.claude/`
+2. Slash commands (`.md`) → `~/.claude/commands/sc/`
+3. Agent definitions (`.md`) → `~/.claude/agents/`
+4. Skills (directories with `SKILL.md`) → `~/.claude/skills/`
 
 **Development Mode**:
 ```bash

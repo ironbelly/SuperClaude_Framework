@@ -45,11 +45,11 @@ Use `/sc:task` when:
 ## Usage
 
 ```bash
-/sc:task [description]                           # Auto-detect all dimensions
-/sc:task [description] --compliance strict       # Force STRICT tier
-/sc:task [description] --compliance light        # Force LIGHT tier
-/sc:task [description] --skip-compliance         # Bypass compliance (escape hatch)
-/sc:task [description] --verify auto             # Auto-select verification
+/sc:task-unified [description]                           # Auto-detect all dimensions
+/sc:task-unified [description] --compliance strict       # Force STRICT tier
+/sc:task-unified [description] --compliance light        # Force LIGHT tier
+/sc:task-unified [description] --skip-compliance         # Bypass compliance (escape hatch)
+/sc:task-unified [description] --verify auto             # Auto-select verification
 ```
 
 ## Behavioral Flow

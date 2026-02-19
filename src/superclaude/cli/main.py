@@ -47,8 +47,8 @@ def install(target: str, force: bool, list_only: bool):
     """
     Install SuperClaude to Claude Code
 
-    Installs core framework files to ~/.claude/ and slash commands to
-    ~/.claude/commands/sc/ so you can use SuperClaude in Claude Code.
+    Installs core framework files, slash commands, agents, and skills
+    to ~/.claude/ so you can use SuperClaude in Claude Code.
 
     Examples:
         superclaude install
@@ -56,6 +56,11 @@ def install(target: str, force: bool, list_only: bool):
         superclaude install --list
         superclaude install --target /custom/path
     """
+    from .install_agents import (
+        install_agents,
+        list_available_agents,
+        list_installed_agents,
+    )
     from .install_commands import (
         install_commands,
         list_available_commands,
@@ -66,6 +71,8 @@ def install(target: str, force: bool, list_only: bool):
         list_core_files,
         list_installed_core_files,
     )
+    from .install_skill import list_available_skills
+    from .install_skills import install_all_skills, list_installed_skills
 
     # List only mode
     if list_only:
@@ -94,6 +101,32 @@ def install(target: str, force: bool, list_only: bool):
         click.echo(
             f"\nCommands: {len(available)} available, {len(installed)} installed"
         )
+
+        # Agents
+        agents_available = list_available_agents()
+        agents_installed = list_installed_agents()
+
+        click.echo("\n📋 Agents:")
+        for name in agents_available:
+            status = "✅ installed" if name in agents_installed else "⬜ not installed"
+            click.echo(f"   {name:35} {status}")
+
+        click.echo(
+            f"\nAgents: {len(agents_available)} available, {len(agents_installed)} installed"
+        )
+
+        # Skills
+        skills_available = list_available_skills()
+        skills_installed = list_installed_skills()
+
+        click.echo("\n📋 Skills:")
+        for name in skills_available:
+            status = "✅ installed" if name in skills_installed else "⬜ not installed"
+            click.echo(f"   {name:35} {status}")
+
+        click.echo(
+            f"\nSkills: {len(skills_available)} available, {len(skills_installed)} installed"
+        )
         return
 
     # Step 1: Install core framework files to ~/.claude/
@@ -112,8 +145,24 @@ def install(target: str, force: bool, list_only: bool):
 
     cmd_success, cmd_message = install_commands(target_path=target_path, force=force)
     click.echo(cmd_message)
+    click.echo()
 
-    if not core_success or not cmd_success:
+    # Step 3: Install agents
+    click.echo("📦 Installing agents to ~/.claude/agents/...")
+    click.echo()
+
+    agent_success, agent_message = install_agents(force=force)
+    click.echo(agent_message)
+    click.echo()
+
+    # Step 4: Install skills
+    click.echo("📦 Installing skills to ~/.claude/skills/...")
+    click.echo()
+
+    skill_success, skill_message = install_all_skills(force=force)
+    click.echo(skill_message)
+
+    if not core_success or not cmd_success or not agent_success or not skill_success:
         sys.exit(1)
 
 
@@ -179,8 +228,10 @@ def update(target: str):
         superclaude update
         superclaude update --target /custom/path
     """
+    from .install_agents import install_agents
     from .install_commands import install_commands
     from .install_core import install_core_files
+    from .install_skills import install_all_skills
 
     click.echo(f"🔄 Updating SuperClaude to version {__version__}...")
     click.echo()
@@ -196,8 +247,20 @@ def update(target: str):
     click.echo("📦 Updating slash commands...")
     cmd_success, cmd_message = install_commands(target_path=target_path, force=True)
     click.echo(cmd_message)
+    click.echo()
 
-    if not core_success or not cmd_success:
+    # Update agents
+    click.echo("📦 Updating agents...")
+    agent_success, agent_message = install_agents(force=True)
+    click.echo(agent_message)
+    click.echo()
+
+    # Update skills
+    click.echo("📦 Updating skills...")
+    skill_success, skill_message = install_all_skills(force=True)
+    click.echo(skill_message)
+
+    if not core_success or not cmd_success or not agent_success or not skill_success:
         sys.exit(1)
 
 
