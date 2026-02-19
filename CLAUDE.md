@@ -67,6 +67,10 @@ make lint             # Run ruff linter
 make format           # Format code with ruff
 make doctor           # Health check diagnostics
 
+# Component Sync (skills + agents)
+make sync-dev         # Copy src/superclaude/{skills,agents} → .claude/
+make verify-sync      # Check src/ and .claude/ are in sync (CI-friendly)
+
 # MCP Servers
 superclaude mcp                              # Interactive install (gateway default)
 superclaude mcp --list                       # List available servers
@@ -80,6 +84,21 @@ make sync-plugin-repo        # Sync artefacts into ../SuperClaude_Plugin
 # Maintenance
 make clean            # Remove build artifacts
 ```
+
+## 🔄 Component Sync
+
+**Source of truth**: `src/superclaude/` is the canonical location for all distributable components (skills, agents, commands, core files). The `superclaude install` CLI reads from here.
+
+**Dev copies**: `.claude/skills/` and `.claude/agents/` in the repo root are convenience copies that Claude Code reads directly during development.
+
+**Workflow when adding/editing components**:
+1. Edit files in `src/superclaude/skills/` or `src/superclaude/agents/`
+2. Run `make sync-dev` to copy changes to `.claude/`
+3. Run `make verify-sync` to confirm sync (also run before committing)
+
+**If you edited `.claude/` directly** (e.g., iterating on a skill with Claude Code):
+1. Copy your changes to `src/superclaude/` manually
+2. Run `make verify-sync` to confirm both sides match
 
 ## 📦 Core Architecture
 
