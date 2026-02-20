@@ -48,9 +48,9 @@ class TestSkillPathConvention:
         assert second_fence > 3, "SKILL.md should have closing frontmatter fence"
 
     def test_skill_name_in_frontmatter(self, skill_md_content):
-        """Frontmatter should contain name: sc-roadmap."""
+        """Frontmatter should contain name: sc:roadmap."""
         frontmatter = skill_md_content.split("---")[1]
-        assert "name: sc-roadmap" in frontmatter
+        assert "name: sc:roadmap" in frontmatter
 
 
 class TestTemplatePathConvention:

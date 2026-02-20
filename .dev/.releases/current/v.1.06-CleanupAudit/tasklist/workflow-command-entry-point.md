@@ -391,7 +391,7 @@ Do NOT duplicate detailed behavioral content in both.
 === Skills ===
   ✅ confidence-check
   ✅ sc-cleanup-audit
-  ✅ sc-roadmap
+  ✅ sc:roadmap
   ✅ sc-task-unified
   ✅ sc-validate-tests
 

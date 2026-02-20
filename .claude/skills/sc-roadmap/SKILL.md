@@ -1,5 +1,5 @@
 ---
-name: sc-roadmap
+name: sc:roadmap
 description: Generate comprehensive project roadmaps from specification documents
 allowed-tools: Read, Glob, Grep, Edit, Write, Bash, TodoWrite, Task
 ---
