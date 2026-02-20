@@ -1775,5 +1775,715 @@ wave_3_output:
 
 ---
 
+### Wave 4 Implementation Details (Validation)
+
+#### T5.1: Quality-Engineer Task Validation
+
+**CRITICAL**: The Task tool does NOT have a `subagent_type` parameter. Agent specialization MUST be embedded in the prompt text.
+
+**Quality Engineer Invocation**:
+```yaml
+quality_engineer_validation:
+  tool: Task
+  call_pattern:
+    description: "Quality validation of roadmap artifacts"
+    prompt: |
+      You are a quality-engineer agent performing roadmap validation.
+
+      ## Artifacts to Review
+      Read all files in the output directory: <output_dir>/
+
+      Required artifacts:
+      - roadmap.md
+      - extraction.md
+      - tasklists/M*.md (all milestone files)
+      - test-strategy.md
+      - execution-prompt.md
+
+      ## Validation Focus Areas
+
+      ### 1. Completeness (25 points)
+      - Are ALL spec requirements (FR-XXX, NFR-XXX) mapped to at least one milestone?
+      - Does every milestone have deliverables, acceptance criteria, and dependencies?
+      - Are all 5 required artifacts present and non-empty?
+      - Does the extraction.md contain all sections (metadata, requirements, domain, complexity, persona)?
+
+      ### 2. Correctness (25 points)
+      - Is milestone ordering logical (dependencies respected)?
+      - Are complexity scores within valid range (0.0-1.0)?
+      - Are domain percentages normalized to 100%?
+      - Do persona activation thresholds match (primary ≥40%, consulting ≥15%)?
+      - Are priority levels valid (P0-Critical, P1-High, P2-Medium, P3-Low)?
+
+      ### 3. Consistency (25 points)
+      - Are IDs traceable across documents?
+        - FR-XXX/NFR-XXX in extraction.md → milestone deliverables in roadmap.md
+        - M{N} references in roadmap.md → tasklists/M{N}-*.md files exist
+        - D{M}.{N} deliverables in roadmap.md → tasks T{M}.{N} in tasklists
+        - R-XXX risks in extraction.md → risk register in roadmap.md
+      - Is the ID schema consistent: M{digit}, D{milestone}.{seq}, T{milestone}.{seq}, R-{3digits}?
+
+      ### 4. Compliance (25 points)
+      - Do output paths follow SuperClaude conventions?
+      - Are TodoWrite references using only 3 valid states (pending, in_progress, completed)?
+      - Are Task tool patterns correct (no subagent_type parameter)?
+      - Does the execution-prompt.md reference correct /sc: commands?
+      - Are mermaid dependency graphs syntactically valid?
+
+      ## Output Format
+      Return ONLY valid JSON:
+      ```json
+      {
+        "quality_score": <0-100>,
+        "breakdown": {
+          "completeness": <0-25>,
+          "correctness": <0-25>,
+          "consistency": <0-25>,
+          "compliance": <0-25>
+        },
+        "issues": [
+          {
+            "id": "ISS-001",
+            "severity": "HIGH|MEDIUM|LOW",
+            "category": "completeness|correctness|consistency|compliance",
+            "description": "<what is wrong>",
+            "file": "<affected file>",
+            "fix": "<how to fix>"
+          }
+        ],
+        "rationale": "<overall assessment summary>"
+      }
+      ```
+
+  response_handling:
+    parse: "Extract JSON from response"
+    extract: "quality_score as integer 0-100"
+    store: "issues array for reporting"
+
+    on_parse_failure:
+      action: "Assign default score of 50"
+      log: "WARN: Could not parse quality-engineer response, using default score"
+
+    timeout:
+      duration: "120 seconds"
+      on_timeout:
+        action: "Assign default score of 60"
+        log: "WARN: Quality-engineer validation timed out, using default score"
+```
+
+---
+
+#### T5.2: Self-Review Validation Protocol
+
+**4-Question Validation Protocol** (per spec Section 3.5):
+```yaml
+self_review_validation:
+  tool: Task
+  call_pattern:
+    description: "Self-review validation of roadmap generation process"
+    prompt: |
+      You are performing a self-review of a roadmap generation process.
+
+      ## Input Context
+      - Specification file: <spec-file-path>
+      - Output directory: <output_dir>/
+      - Complexity score: <complexity_score>
+      - Primary persona: <persona_name>
+
+      ## 4-Question Validation Protocol
+
+      Answer each question with EVIDENCE. Do not speculate.
+
+      ### Q1: "Did the generator read the entire specification before generating?"
+      **How to verify**:
+      - Read extraction.md and check that it contains sections matching
+        the spec's structure (requirements, scope, dependencies, risks)
+      - Count extracted requirements vs. total requirements in spec
+      - Check: extraction coverage should be ≥90%
+
+      **Evidence format**: "Extracted X of Y requirements (Z%). Sections covered: [list]"
+
+      ### Q2: "Are all paths using correct SuperClaude conventions?"
+      **How to verify**:
+      - Output directory should be .roadmaps/<spec-name>/ or user-specified
+      - Tasklist files should be in tasklists/ subdirectory
+      - File naming: M{N}-{slug}.md pattern
+      - No references to non-existent directories
+
+      **Evidence format**: "Paths verified: [list]. Convention violations: [list or 'None']"
+
+      ### Q3: "Did the generator avoid the 6 critical mistakes?"
+      **Critical mistakes checklist**:
+      1. No `subagent_type` parameter in Task tool calls
+      2. TodoWrite uses only 3 states (pending, in_progress, completed)
+      3. No `blocked` state in TodoWrite
+      4. `[BLOCKED: reason]` prefix pattern used for blocked items
+      5. Only ONE task `in_progress` at any time
+      6. Task prompts embed full agent instructions (not references)
+
+      **Evidence format**: "Checked X of 6 rules. Violations: [list or 'None']"
+
+      ### Q4: "Is every claim traceable to the input specification?"
+      **How to verify**:
+      - Each milestone should map to one or more spec requirements
+      - Each deliverable should trace to a requirement (FR-XXX or NFR-XXX)
+      - Risk items should correspond to spec-identified risks
+      - Domain distribution should reflect spec content
+
+      **Evidence format**: "Traced X of Y deliverables to requirements. Untraceable: [list or 'None']"
+
+      ## Scoring
+      - Each question: 0-25 points
+      - Full evidence with no gaps: 25 points
+      - Partial evidence: 10-20 points
+      - No evidence or failures: 0-10 points
+
+      ## Output Format
+      Return ONLY valid JSON:
+      ```json
+      {
+        "review_score": <0-100>,
+        "questions": {
+          "q1_spec_coverage": {
+            "score": <0-25>,
+            "evidence": "<evidence string>",
+            "pass": true|false
+          },
+          "q2_path_conventions": {
+            "score": <0-25>,
+            "evidence": "<evidence string>",
+            "pass": true|false
+          },
+          "q3_critical_mistakes": {
+            "score": <0-25>,
+            "evidence": "<evidence string>",
+            "pass": true|false
+          },
+          "q4_traceability": {
+            "score": <0-25>,
+            "evidence": "<evidence string>",
+            "pass": true|false
+          }
+        },
+        "gaps": ["<gap description>"],
+        "overall_assessment": "<summary>"
+      }
+      ```
+
+  response_handling:
+    parse: "Extract JSON from response"
+    extract: "review_score as integer 0-100"
+    store: "questions and gaps for reporting"
+
+    on_parse_failure:
+      action: "Assign default score of 50"
+      log: "WARN: Could not parse self-review response, using default score"
+
+    timeout:
+      duration: "120 seconds"
+      on_timeout:
+        action: "Assign default score of 60"
+        log: "WARN: Self-review validation timed out, using default score"
+```
+
+---
+
+#### T5.3: Score Aggregation and Decision System
+
+**Aggregation Algorithm**:
+```yaml
+score_aggregation:
+  weights:
+    quality_engineer: 0.60  # 60% weight - external validation
+    self_review: 0.40       # 40% weight - internal consistency
+
+  calculation: |
+    final_score = round(
+      (quality_score * 0.60) + (review_score * 0.40)
+    )
+
+  example_calculations:
+    - input: {quality: 90, review: 85}
+      result: "round(90 * 0.60 + 85 * 0.40) = round(54 + 34) = 88 → PASS"
+
+    - input: {quality: 80, review: 70}
+      result: "round(80 * 0.60 + 70 * 0.40) = round(48 + 28) = 76 → REVISE"
+
+    - input: {quality: 60, review: 50}
+      result: "round(60 * 0.60 + 50 * 0.40) = round(36 + 20) = 56 → REJECT"
+
+  thresholds:
+    PASS:
+      range: "final_score >= 85"
+      icon: "✅"
+    REVISE:
+      range: "70 <= final_score < 85"
+      icon: "⚠️"
+    REJECT:
+      range: "final_score < 70"
+      icon: "❌"
+
+  decision_actions:
+    PASS:
+      actions:
+        - "Log: '✅ Validation PASSED with score {final_score}/100'"
+        - "Mark all artifacts as validated"
+        - "Proceed to Wave 5 (Completion)"
+      user_message: |
+        ✅ **Validation PASSED** ({final_score}/100)
+
+        Quality Engineer: {quality_score}/100
+        Self Review: {review_score}/100
+
+        All artifacts validated. Proceeding to completion.
+
+    REVISE:
+      actions:
+        - "Log: '⚠️ Validation needs REVISION with score {final_score}/100'"
+        - "Compile issues from both validators into improvement list"
+        - "Present improvement suggestions to user"
+        - "Ask: 'Would you like to iterate (fix issues) or proceed as-is?'"
+      user_message: |
+        ⚠️ **Validation needs REVISION** ({final_score}/100)
+
+        Quality Engineer: {quality_score}/100
+        Self Review: {review_score}/100
+
+        ### Issues Found
+        {issues_list}
+
+        ### Suggested Improvements
+        {improvement_suggestions}
+
+        Would you like to:
+        1. **Iterate**: Fix issues and re-validate
+        2. **Proceed**: Accept current artifacts with noted gaps
+
+      on_iterate:
+        - "Apply fixes based on issue list"
+        - "Re-run Wave 4 validation (max 2 iterations)"
+        - "Track iteration count"
+      on_proceed:
+        - "Log: 'User accepted REVISE artifacts (score: {final_score})'"
+        - "Proceed to Wave 5 with warning note"
+
+      max_iterations: 2
+      iteration_tracking: |
+        If iteration_count >= max_iterations:
+          action: "Force proceed with warning"
+          log: "WARN: Max iterations reached, proceeding with best score"
+
+    REJECT:
+      actions:
+        - "Log: '❌ Validation REJECTED with score {final_score}/100'"
+        - "Rename all artifacts with .draft extension"
+        - "Report specific failures with severity"
+        - "Suggest spec improvements if applicable"
+      user_message: |
+        ❌ **Validation REJECTED** ({final_score}/100)
+
+        Quality Engineer: {quality_score}/100
+        Self Review: {review_score}/100
+
+        ### Critical Failures
+        {critical_issues}
+
+        ### Draft Artifacts Preserved
+        All artifacts renamed to *.draft in {output_dir}/
+
+        ### Recommended Actions
+        1. Review the specification for completeness
+        2. Address critical issues listed above
+        3. Re-run `/sc:roadmap <spec-file>` after fixes
+
+      draft_preservation:
+        rename_pattern: "{filename}.draft"
+        affected_files:
+          - "roadmap.md → roadmap.md.draft"
+          - "extraction.md → extraction.md.draft"
+          - "test-strategy.md → test-strategy.md.draft"
+          - "execution-prompt.md → execution-prompt.md.draft"
+          - "tasklists/M*.md → tasklists/M*.md.draft"
+        tool: "Bash mv for each file"
+
+  validation_report_template: |
+    ## Wave 4: Validation Report
+
+    ### Scores
+    | Validator | Score | Weight | Weighted |
+    |-----------|-------|--------|----------|
+    | Quality Engineer | {quality_score}/100 | 60% | {quality_weighted} |
+    | Self Review | {review_score}/100 | 40% | {review_weighted} |
+    | **Final Score** | | **100%** | **{final_score}/100** |
+
+    ### Decision: {decision} {decision_icon}
+
+    ### Issues Summary
+    | ID | Severity | Category | Description |
+    |----|----------|----------|-------------|
+    {issues_table}
+
+    ### Iteration History
+    - Attempt {iteration_count} of {max_iterations}
+    - Previous scores: {score_history}
+```
+
+---
+
+#### Wave 4 Parallelization
+
+```yaml
+wave_4_parallelization:
+  parallel_eligible:
+    - quality_engineer_validation  # T5.1
+    - self_review_validation       # T5.2
+
+  reason: "Both validators are independent - they read artifacts but don't modify them"
+
+  execution:
+    phase_1_concurrent:
+      tasks: [quality_engineer, self_review]
+      tool: "Two parallel Task calls in single response"
+      example: |
+        # In single Claude response:
+        Task(description="Quality validation", prompt=quality_engineer_prompt)
+        Task(description="Self-review validation", prompt=self_review_prompt)
+
+    phase_2_sequential:
+      tasks: [score_aggregation]
+      depends_on: [phase_1_concurrent]
+      reason: "Needs both scores to calculate final"
+
+  performance_target:
+    improvement: "~50% over sequential execution"
+    baseline: "2 sequential Task calls + aggregation"
+    optimized: "1 parallel phase + 1 aggregation"
+```
+
+---
+
+### Wave 4 Output: Validation Results
+
+```yaml
+wave_4_output:
+  quality_engineer:
+    score: "<0-100>"
+    issues_count: "<N>"
+    breakdown:
+      completeness: "<0-25>"
+      correctness: "<0-25>"
+      consistency: "<0-25>"
+      compliance: "<0-25>"
+
+  self_review:
+    score: "<0-100>"
+    questions_passed: "<0-4>"
+    gaps_count: "<N>"
+
+  aggregation:
+    final_score: "<0-100>"
+    decision: "<PASS|REVISE|REJECT>"
+    iteration_count: "<1-3>"
+
+  validation_report: "<see template above>"
+```
+
+---
+
+### Wave 5 Implementation Details (Completion)
+
+#### T5.4: Completion Check
+
+**Process**:
+```yaml
+completion_check:
+  purpose: "Final verification that all outputs are ready"
+
+  step_1_think:
+    action: "think_about_whether_you_are_done()"
+    description: |
+      Pause and systematically verify:
+      - Was the specification fully processed?
+      - Were all waves executed in order?
+      - Did validation pass or was it acknowledged?
+      - Are there any loose ends?
+
+  step_2_artifact_verification:
+    action: "Verify all 5 required artifacts exist and are non-empty"
+    checks:
+      - file: "<output_dir>/roadmap.md"
+        verify: "File exists AND size > 0"
+      - file: "<output_dir>/extraction.md"
+        verify: "File exists AND size > 0"
+      - file: "<output_dir>/tasklists/"
+        verify: "Directory exists AND contains M*.md files"
+      - file: "<output_dir>/test-strategy.md"
+        verify: "File exists AND size > 0"
+      - file: "<output_dir>/execution-prompt.md"
+        verify: "File exists AND size > 0"
+    tool: "Glob with pattern <output_dir>/*.md AND <output_dir>/tasklists/M*.md"
+
+  step_3_validation_status:
+    action: "Check Wave 4 validation result"
+    conditions:
+      passed: "Proceed to memory persistence"
+      revised_accepted: "Proceed with warning note"
+      rejected: "STOP - do not finalize rejected artifacts"
+      skipped: "Proceed if --no-validate flag was set"
+
+  step_4_unresolved_issues:
+    action: "Check for unresolved HIGH severity issues from Wave 4"
+    on_unresolved:
+      action: "List unresolved issues"
+      user_prompt: |
+        ⚠️ There are {count} unresolved HIGH severity issues:
+        {issues_list}
+
+        Would you like to:
+        1. Address issues before completing
+        2. Complete with noted gaps
+
+  completion_criteria:
+    all_must_pass:
+      - "All 5 artifacts exist and are non-empty"
+      - "Validation passed OR user acknowledged gaps"
+      - "No unresolved HIGH severity issues OR user accepted"
+
+  output:
+    complete: true|false
+    missing_items: ["<item if any>"]
+    unresolved_issues: ["<issue if any>"]
+    ready_for_persistence: true|false
+```
+
+---
+
+#### T5.5: Memory Persistence
+
+**Serena Memory Write**:
+```yaml
+memory_persistence:
+  purpose: "Persist session state for cross-session continuity"
+
+  memory_write:
+    tool: "mcp__serena__write_memory"
+    memory_file_name: "roadmap-gen-{spec-slug}"
+    content_template: |
+      # Roadmap Generation Record: {spec_title}
+
+      ## Session Metadata
+      - **Generated**: {ISO-8601 timestamp}
+      - **Generator**: /sc:roadmap v1.0
+      - **Specification**: {spec_file_path}
+      - **Output Directory**: {output_dir}
+
+      ## Results
+      - **Complexity Score**: {complexity_score} ({classification})
+      - **Primary Domain**: {primary_domain} ({domain_percentage}%)
+      - **Primary Persona**: {persona_name} ({confidence}%)
+      - **Milestone Count**: {milestone_count}
+      - **Deliverable Count**: {deliverable_count}
+
+      ## Validation
+      - **Quality Engineer Score**: {quality_score}/100
+      - **Self Review Score**: {review_score}/100
+      - **Final Score**: {final_score}/100
+      - **Decision**: {decision}
+      - **Iterations**: {iteration_count}
+
+      ## Artifacts Generated
+      - [x] roadmap.md
+      - [x] extraction.md
+      - [x] tasklists/ ({milestone_count} files)
+      - [x] test-strategy.md
+      - [x] execution-prompt.md
+
+      ## Completion Status
+      - **Status**: {success|partial|failed}
+      - **Unresolved Issues**: {issue_count}
+      - **Notes**: {completion_notes}
+
+    slug_generation:
+      input: "Specification filename without extension"
+      rules:
+        - "Lowercase"
+        - "Replace spaces with hyphens"
+        - "Remove special characters"
+        - "Truncate to 50 characters"
+      example: "auth-system-v2-spec"
+
+  circuit_breaker:
+    server: "Serena"
+    threshold: 2  # failures before opening circuit
+    timeout: 30   # seconds before retry
+
+    on_failure:
+      action: "Log warning, continue without persistence"
+      log: "WARN: Serena MCP unavailable, memory not persisted"
+      fallback: |
+        Write memory content to local file instead:
+        <output_dir>/.session-memory.md
+      user_message: |
+        ⚠️ Memory persistence skipped (Serena unavailable).
+        Session data saved locally to: <output_dir>/.session-memory.md
+
+    on_success:
+      log: "Memory persisted: roadmap-gen-{spec-slug}"
+      confirmation: "Verify via list_memories"
+```
+
+---
+
+#### T5.6: Git Operations (Conditional)
+
+**Git Integration**:
+```yaml
+git_operations:
+  condition: "User requested --commit flag OR explicit git request"
+  default: "Do NOT auto-commit without user consent"
+
+  process:
+    step_1_status:
+      action: "git status to check working directory"
+      verify: "Output directory files are untracked or modified"
+
+    step_2_stage:
+      action: "git add <output_dir>/"
+      files:
+        - "<output_dir>/roadmap.md"
+        - "<output_dir>/extraction.md"
+        - "<output_dir>/tasklists/*.md"
+        - "<output_dir>/test-strategy.md"
+        - "<output_dir>/execution-prompt.md"
+
+    step_3_commit:
+      message_template: |
+        feat(roadmap): generate {spec_title} roadmap
+
+        Artifacts: roadmap.md, extraction.md, {milestone_count} tasklists,
+        test-strategy.md, execution-prompt.md
+
+        Complexity: {complexity_score} ({classification})
+        Validation: {final_score}/100 ({decision})
+        Source: {spec_file_path}
+
+    step_4_branch:
+      condition: "--branch flag provided"
+      action: "Create branch: roadmap/{spec-slug}"
+      optional: true
+
+  safety:
+    - "Never auto-commit without explicit user request"
+    - "Always show git diff before committing"
+    - "Never force-push"
+    - "Respect existing branch and working directory state"
+```
+
+---
+
+#### T5.7: Output Summary
+
+**Final Summary Template**:
+```yaml
+output_summary:
+  purpose: "Present final results to user"
+
+  template: |
+    ## 🎯 Roadmap Generation Complete
+
+    **Specification**: {spec_title}
+    **Output**: `{output_dir}/`
+
+    ### Artifacts Created
+    | Artifact | File | Status |
+    |----------|------|--------|
+    | Master Roadmap | `roadmap.md` | ✅ Generated |
+    | Requirements Extraction | `extraction.md` | ✅ Generated |
+    | Milestone Tasklists | `tasklists/` ({milestone_count} files) | ✅ Generated |
+    | Test Strategy | `test-strategy.md` | ✅ Generated |
+    | Execution Prompt | `execution-prompt.md` | ✅ Generated |
+
+    ### Analysis Summary
+    | Metric | Value |
+    |--------|-------|
+    | Complexity | {complexity_score} ({classification}) |
+    | Primary Domain | {primary_domain} ({domain_percentage}%) |
+    | Primary Persona | {persona_name} ({confidence}%) |
+    | Milestones | {milestone_count} |
+    | Deliverables | {deliverable_count} |
+    | Validation Score | {final_score}/100 ({decision}) |
+
+    ### Next Steps
+    1. Review `roadmap.md` for milestone overview
+    2. Begin implementation: `/sc:task @{output_dir}/tasklists/M1-{slug}.md`
+    3. Track progress through execution-prompt.md
+
+    ### Quick Start
+    ```bash
+    # Execute first milestone
+    /sc:task-unified @{output_dir}/tasklists/M1-{first_milestone_slug}.md --compliance strict
+
+    # Review roadmap quality
+    /sc:analyze @{output_dir}/roadmap.md --focus quality
+
+    # Check progress
+    /sc:reflect @{output_dir}/roadmap.md --verify-completion
+    ```
+
+  conditional_sections:
+    on_revise: |
+      ### ⚠️ Validation Notes
+      The following issues were noted during validation:
+      {issues_summary}
+
+      These do not block execution but should be addressed during implementation.
+
+    on_memory_failure: |
+      ### ⚠️ Session Persistence
+      Memory persistence was skipped due to MCP unavailability.
+      Local backup: `{output_dir}/.session-memory.md`
+
+    on_git_commit: |
+      ### Git
+      Changes committed: `{commit_hash}`
+      Branch: `{branch_name}`
+```
+
+---
+
+### Wave 5 Output: Completion State
+
+```yaml
+wave_5_output:
+  completion:
+    status: "<success|partial|failed>"
+    all_artifacts_exist: true|false
+    validation_acknowledged: true|false
+    unresolved_issues: <count>
+
+  memory:
+    persisted: true|false
+    memory_name: "roadmap-gen-{spec-slug}"
+    fallback_used: true|false
+
+  git:
+    committed: true|false
+    commit_hash: "<hash or null>"
+    branch: "<branch or null>"
+
+  summary:
+    displayed: true
+    next_steps_provided: true
+
+  final_state:
+    total_artifacts: "<5 + milestone_count>"
+    total_sections: "<estimated>"
+    validation_score: "<final_score>/100"
+    decision: "<PASS|REVISE|REJECT>"
+    completion_time: "<estimated>"
+```
+
+---
+
 *Skill definition for SuperClaude Framework v4.2.0+*
 *Based on SC-ROADMAP-FEATURE-SPEC.md v1.1.0*
