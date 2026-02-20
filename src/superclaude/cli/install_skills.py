@@ -3,12 +3,30 @@ Batch Skill Installation
 
 Installs all SuperClaude skills to ~/.claude/skills/ directory.
 Wraps the single-skill installer for batch operation during `superclaude install`.
+
+Skills whose directory name starts with "sc-" and have a corresponding
+slash command (e.g. sc-roadmap → commands/roadmap.md) are served via
+/sc:<name> commands and are NOT installed as separate skills to avoid
+duplicate autocomplete entries.
 """
 
 from pathlib import Path
 from typing import List, Tuple
 
 from .install_skill import install_skill_command, list_available_skills
+
+
+def _has_corresponding_command(skill_name: str) -> bool:
+    """Check if an sc-* skill has a matching slash command.
+
+    For example, skill "sc-roadmap" has a command if
+    src/superclaude/commands/roadmap.md exists.
+    """
+    if not skill_name.startswith("sc-"):
+        return False
+    cmd_name = skill_name[3:]  # strip "sc-" prefix
+    package_root = Path(__file__).resolve().parent.parent
+    return (package_root / "commands" / f"{cmd_name}.md").exists()
 
 
 def install_all_skills(
@@ -35,8 +53,20 @@ def install_all_skills(
     installed = []
     skipped = []
     failed = []
+    served_by_command = []
 
     for skill_name in available:
+        # Skip sc-* skills that have a corresponding /sc: command
+        if _has_corresponding_command(skill_name):
+            served_by_command.append(skill_name)
+            # Remove stale install if present
+            stale = target_path / skill_name
+            if stale.exists():
+                import shutil
+
+                shutil.rmtree(stale)
+            continue
+
         skill_target = target_path / skill_name
 
         if skill_target.exists() and not force:
@@ -61,6 +91,14 @@ def install_all_skills(
         for name in installed:
             messages.append(f"   - {name}")
 
+    if served_by_command:
+        messages.append(
+            f"\n⏭️  {len(served_by_command)} skills served by /sc: commands (not installed as skills):"
+        )
+        for name in served_by_command:
+            cmd_name = name[3:]  # strip "sc-" prefix
+            messages.append(f"   - {name} → /sc:{cmd_name}")
+
     if skipped:
         messages.append(
             f"\n⚠️  Skipped {len(skipped)} existing skills (use --force to reinstall):"
@@ -73,7 +111,7 @@ def install_all_skills(
         for fail in failed:
             messages.append(f"   - {fail}")
 
-    if not installed and not skipped:
+    if not installed and not skipped and not served_by_command:
         return True, "No skills to install"
 
     messages.append(f"\n📁 Installation directory: {target_path}")

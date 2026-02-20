@@ -4,7 +4,7 @@ Compliance tests for SuperClaude path conventions.
 Verifies:
 - Skills at .claude/skills/{name}/SKILL.md
 - Templates at plugins/superclaude/templates/roadmaps/
-- Output at .roadmaps/<spec-name>/
+- Output at .dev/releases/current/<spec-name>/
 - Tasklists in tasklists/ subdirectory
 """
 
@@ -79,8 +79,8 @@ class TestOutputPathConvention:
     """Verify output directory conventions."""
 
     def test_default_output_path(self, skill_md_content):
-        """Default output should be .roadmaps/<spec-name>/."""
-        assert ".roadmaps/" in skill_md_content
+        """Default output should be .dev/releases/current/<spec-name>/."""
+        assert ".dev/releases/current/" in skill_md_content
 
     def test_tasklist_subdirectory(self, skill_md_content):
         """Tasklists should be in a tasklists/ subdirectory."""

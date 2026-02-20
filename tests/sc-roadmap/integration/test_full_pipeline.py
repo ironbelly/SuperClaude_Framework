@@ -102,8 +102,8 @@ class TestOutputConventions:
     """Test output directory and file conventions."""
 
     def test_default_output_directory(self, skill_md_content):
-        """Default output should be .roadmaps/<spec-name>/."""
-        assert ".roadmaps/" in skill_md_content
+        """Default output should be .dev/releases/current/<spec-name>/."""
+        assert ".dev/releases/current/" in skill_md_content
 
     def test_tasklists_subdirectory(self, skill_md_content):
         """Tasklists should go in tasklists/ subdirectory."""

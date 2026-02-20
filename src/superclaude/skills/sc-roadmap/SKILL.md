@@ -48,7 +48,7 @@ Generate deterministic release roadmap packages from specification documents wit
 /sc:roadmap specs/auth-system.md --template security
 
 # Custom output location
-/sc:roadmap requirements/v2.0-prd.md --output .roadmaps/v2.0-release/
+/sc:roadmap requirements/v2.0-prd.md --output .dev/releases/current/v2.0-release/
 
 # Deep analysis with strict validation
 /sc:roadmap specs/migration-plan.md --depth deep --compliance strict
@@ -65,7 +65,7 @@ Generate deterministic release roadmap packages from specification documents wit
 | Flag | Short | Description | Default |
 |------|-------|-------------|---------|
 | `--template <type>` | `-t` | Template type: `feature`, `quality`, `docs`, `security`, `performance`, `migration` | Auto-detect |
-| `--output <dir>` | `-o` | Output directory for roadmap artifacts | `.roadmaps/<spec-name>/` |
+| `--output <dir>` | `-o` | Output directory for roadmap artifacts | `.dev/releases/current/<spec-name>/` |
 | `--depth <level>` | `-d` | Analysis depth: `quick`, `standard`, `deep` | `standard` |
 | `--validate` | `-v` | Enable multi-agent validation (STRICT tier) | `true` |
 | `--no-validate` | | Skip validation phase | `false` |
@@ -93,7 +93,7 @@ wave_0_prerequisites:
 
   step_2_output_directory:
     action: "Validate output directory"
-    default: ".roadmaps/<spec-name>/"
+    default: ".dev/releases/current/<spec-name>/"
     checks:
       - "Parent directory exists"
       - "Path is writable"
@@ -1905,7 +1905,7 @@ self_review_validation:
 
       ### Q2: "Are all paths using correct SuperClaude conventions?"
       **How to verify**:
-      - Output directory should be .roadmaps/<spec-name>/ or user-specified
+      - Output directory should be .dev/releases/current/<spec-name>/ or user-specified
       - Tasklist files should be in tasklists/ subdirectory
       - File naming: M{N}-{slug}.md pattern
       - No references to non-existent directories

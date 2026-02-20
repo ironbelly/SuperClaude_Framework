@@ -111,6 +111,10 @@ sync-dev:
 	@for skill_dir in src/superclaude/skills/*/; do \
 		skill_name=$$(basename "$$skill_dir"); \
 		case "$$skill_name" in __*) continue;; esac; \
+		cmd_name=$${skill_name#sc-}; \
+		if [ "$$cmd_name" != "$$skill_name" ] && [ -f "src/superclaude/commands/$$cmd_name.md" ]; then \
+			continue; \
+		fi; \
 		if [ -f "$$skill_dir/SKILL.md" ] || [ -f "$$skill_dir/skill.md" ]; then \
 			mkdir -p ".claude/skills/$$skill_name"; \
 			find "$$skill_dir" -type f ! -name '__init__.py' ! -path '*/__pycache__/*' -exec sh -c ' \
@@ -147,6 +151,11 @@ verify-sync:
 	for skill_dir in src/superclaude/skills/*/; do \
 		name=$$(basename "$$skill_dir"); \
 		case "$$name" in __*) continue;; esac; \
+		cmd_name=$${name#sc-}; \
+		if [ "$$cmd_name" != "$$name" ] && [ -f "src/superclaude/commands/$$cmd_name.md" ]; then \
+			echo "  ⏭️  $$name (served by /sc:$$cmd_name command)"; \
+			continue; \
+		fi; \
 		if [ ! -d ".claude/skills/$$name" ]; then \
 			echo "  ❌ MISSING in .claude/skills/: $$name"; \
 			drift=1; \
