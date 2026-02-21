@@ -62,6 +62,12 @@ Each command specifies: `command`, `category`, `purpose`, `wave-enabled` (true|f
 
 **`/cleanup [target] [flags]`** - Project cleanup and technical debt reduction | Auto-Persona: Refactorer | MCP: Sequential
 
+**`/cleanup-audit [target] [--pass surface|structural|cross-cutting|all] [--batch-size N] [--focus infrastructure|frontend|backend|all]`** — Multi-pass read-only repository audit (wave-enabled, complex profile)
+- **Auto-Persona**: Analyzer, Architect, DevOps, QA, Refactorer
+- **MCP**: Sequential (cross-cutting synthesis), Serena (import chains), Context7 (framework patterns)
+- **Tools**: [Read, Grep, Glob, Bash(git/wc/find/du), TodoWrite, Task, Write]
+- **Subagents**: audit-scanner (Haiku), audit-analyzer (Sonnet), audit-comparator (Sonnet), audit-consolidator (Sonnet), audit-validator (Sonnet)
+
 ### Additional Commands
 
 **`/document [target] [flags]`** - Documentation generation | Auto-Persona: Scribe, Mentor | MCP: Context7, Sequential

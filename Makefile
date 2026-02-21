@@ -1,4 +1,4 @@
-.PHONY: install test test-plugin doctor verify clean lint format build-plugin sync-plugin-repo uninstall-legacy help
+.PHONY: install test test-plugin doctor verify clean lint format build-plugin sync-plugin-repo sync-dev verify-sync uninstall-legacy help
 
 # Installation (local source, editable) - RECOMMENDED
 install:
@@ -104,6 +104,140 @@ translate:
 	@echo "✅ Translation complete!"
 	@echo "📝 Files updated: README-zh.md, README-ja.md"
 
+# Sync src/superclaude/{skills,agents} → .claude/{skills,agents} for local dev
+sync-dev:
+	@echo "🔄 Syncing src/superclaude/ → .claude/ for local development..."
+	@mkdir -p .claude/skills .claude/agents
+	@for skill_dir in src/superclaude/skills/*/; do \
+		skill_name=$$(basename "$$skill_dir"); \
+		case "$$skill_name" in __*) continue;; esac; \
+		cmd_name=$${skill_name#sc-}; \
+		if [ "$$cmd_name" != "$$skill_name" ] && [ -f "src/superclaude/commands/$$cmd_name.md" ]; then \
+			continue; \
+		fi; \
+		if [ -f "$$skill_dir/SKILL.md" ] || [ -f "$$skill_dir/skill.md" ]; then \
+			mkdir -p ".claude/skills/$$skill_name"; \
+			find "$$skill_dir" -type f ! -name '__init__.py' ! -path '*/__pycache__/*' -exec sh -c ' \
+				src="$$1"; skill_dir="$$2"; target_base="$$3"; \
+				rel=$${src#$$skill_dir}; \
+				target_dir="$$target_base/$$(dirname "$$rel")"; \
+				mkdir -p "$$target_dir"; \
+				cp "$$src" "$$target_dir/" \
+			' _ {} "$$skill_dir" ".claude/skills/$$skill_name" \; ; \
+		fi; \
+	done
+	@for agent in src/superclaude/agents/*.md; do \
+		name=$$(basename "$$agent"); \
+		case "$$name" in README.md) continue;; esac; \
+		cp "$$agent" ".claude/agents/$$name"; \
+	done
+	@mkdir -p .claude/commands/sc
+	@for cmd in src/superclaude/commands/*.md; do \
+		name=$$(basename "$$cmd"); \
+		case "$$name" in README.md|__init__.py) continue;; esac; \
+		cp "$$cmd" ".claude/commands/sc/$$name"; \
+	done
+	@echo "✅ Sync complete."
+	@echo "   Skills:   $$(ls -d .claude/skills/*/ 2>/dev/null | wc -l | tr -d ' ') directories"
+	@echo "   Agents:   $$(ls .claude/agents/*.md 2>/dev/null | wc -l | tr -d ' ') files"
+	@echo "   Commands: $$(ls .claude/commands/sc/*.md 2>/dev/null | wc -l | tr -d ' ') files"
+
+# Verify src/superclaude/ and .claude/ are in sync (CI-friendly, exits 1 on drift)
+verify-sync:
+	@echo "🔍 Verifying src/superclaude/ ↔ .claude/ sync..."
+	@drift=0; \
+	echo ""; \
+	echo "=== Skills ==="; \
+	for skill_dir in src/superclaude/skills/*/; do \
+		name=$$(basename "$$skill_dir"); \
+		case "$$name" in __*) continue;; esac; \
+		cmd_name=$${name#sc-}; \
+		if [ "$$cmd_name" != "$$name" ] && [ -f "src/superclaude/commands/$$cmd_name.md" ]; then \
+			echo "  ⏭️  $$name (served by /sc:$$cmd_name command)"; \
+			continue; \
+		fi; \
+		if [ ! -d ".claude/skills/$$name" ]; then \
+			echo "  ❌ MISSING in .claude/skills/: $$name"; \
+			drift=1; \
+		else \
+			changes=$$(diff -rq --exclude='__init__.py' --exclude='__pycache__' "$$skill_dir" ".claude/skills/$$name" 2>/dev/null); \
+			if [ -n "$$changes" ]; then \
+				echo "  ⚠️  DIFFERS: $$name"; \
+				echo "$$changes" | sed 's/^/      /'; \
+				drift=1; \
+			else \
+				echo "  ✅ $$name"; \
+			fi; \
+		fi; \
+	done; \
+	for skill_dir in .claude/skills/*/; do \
+		name=$$(basename "$$skill_dir"); \
+		case "$$name" in __*) continue;; esac; \
+		if [ ! -d "src/superclaude/skills/$$name" ]; then \
+			echo "  ❌ MISSING in src/superclaude/skills/: $$name (not distributable!)"; \
+			drift=1; \
+		fi; \
+	done; \
+	echo ""; \
+	echo "=== Agents ==="; \
+	for agent in src/superclaude/agents/*.md; do \
+		name=$$(basename "$$agent"); \
+		case "$$name" in README.md) continue;; esac; \
+		if [ ! -f ".claude/agents/$$name" ]; then \
+			echo "  ❌ MISSING in .claude/agents/: $$name"; \
+			drift=1; \
+		else \
+			if ! diff -q "$$agent" ".claude/agents/$$name" > /dev/null 2>&1; then \
+				echo "  ⚠️  DIFFERS: $$name"; \
+				drift=1; \
+			else \
+				echo "  ✅ $$name"; \
+			fi; \
+		fi; \
+	done; \
+	for agent in .claude/agents/*.md; do \
+		[ -f "$$agent" ] || continue; \
+		name=$$(basename "$$agent"); \
+		case "$$name" in README.md) continue;; esac; \
+		if [ ! -f "src/superclaude/agents/$$name" ]; then \
+			echo "  ❌ MISSING in src/superclaude/agents/: $$name (not distributable!)"; \
+			drift=1; \
+		fi; \
+	done; \
+	echo ""; \
+	echo "=== Commands ==="; \
+	for cmd in src/superclaude/commands/*.md; do \
+		name=$$(basename "$$cmd"); \
+		case "$$name" in README.md) continue;; esac; \
+		if [ ! -f ".claude/commands/sc/$$name" ]; then \
+			echo "  ❌ MISSING in .claude/commands/sc/: $$name"; \
+			drift=1; \
+		else \
+			if ! diff -q "$$cmd" ".claude/commands/sc/$$name" > /dev/null 2>&1; then \
+				echo "  ⚠️  DIFFERS: $$name"; \
+				drift=1; \
+			else \
+				echo "  ✅ $$name"; \
+			fi; \
+		fi; \
+	done; \
+	for cmd in .claude/commands/sc/*.md; do \
+		[ -f "$$cmd" ] || continue; \
+		name=$$(basename "$$cmd"); \
+		case "$$name" in README.md) continue;; esac; \
+		if [ ! -f "src/superclaude/commands/$$name" ]; then \
+			echo "  ❌ MISSING in src/superclaude/commands/: $$name (not distributable!)"; \
+			drift=1; \
+		fi; \
+	done; \
+	echo ""; \
+	if [ "$$drift" -eq 0 ]; then \
+		echo "✅ All components in sync."; \
+	else \
+		echo "❌ Drift detected! Run 'make sync-dev' to fix, or copy .claude/ changes to src/."; \
+		exit 1; \
+	fi
+
 # Show help
 help:
 	@echo "SuperClaude Framework - Available commands:"
@@ -119,6 +253,10 @@ help:
 	@echo "  make lint            - Run linter (ruff check)"
 	@echo "  make format          - Format code (ruff format)"
 	@echo "  make clean           - Clean build artifacts"
+	@echo ""
+	@echo "🔄 Component Sync:"
+	@echo "  make sync-dev        - Sync src/ → .claude/ for local development"
+	@echo "  make verify-sync     - Check src/ and .claude/ are in sync (CI-friendly)"
 	@echo ""
 	@echo "🔌 Plugin Packaging:"
 	@echo "  make build-plugin    - Build SuperClaude plugin artefacts into dist/"

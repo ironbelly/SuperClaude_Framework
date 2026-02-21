@@ -144,6 +144,9 @@ wave-strategies:
 | "security audit enterprise" | complex | security | --wave-mode --wave-validation | 95% |
 | "modernize legacy system" | complex | legacy | --wave-mode --enterprise-waves --wave-checkpoint | 92% |
 | "comprehensive code review" | complex | quality | --wave-mode --wave-validation --systematic-waves | 94% |
+| "cleanup audit" | complex | quality | analyzer persona, --wave-mode --systematic-waves, Sequential + Serena | 95% |
+| "repository audit" | complex | quality | analyzer persona, --delegate --multi-agent, 5 custom subagents | 95% |
+| "dead code detection" | complex | quality | analyzer persona, --think-hard, Sequential | 90% |
 
 ### Tier Classification Routing (Compliance Enforcement)
 
