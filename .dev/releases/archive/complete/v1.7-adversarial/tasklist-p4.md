@@ -2,13 +2,13 @@
 
 ## Metadata & Artifact Paths
 
-- **TASKLIST_ROOT**: `.roadmaps/v1.7.0/`
-- **Tasklist Path**: `.roadmaps/v1.7.0/tasklist-p3.md`
-- **Execution Log Path**: `.roadmaps/v1.7.0/execution-log-p3.md`
-- **Checkpoint Reports Path**: `.roadmaps/v1.7.0/checkpoints/`
-- **Evidence Root**: `.roadmaps/v1.7.0/evidence/`
-- **Artifacts Root**: `.roadmaps/v1.7.0/artifacts/`
-- **Feedback Log Path**: `.roadmaps/v1.7.0/feedback-log.md`
+- **TASKLIST_ROOT**: `.dev/releases/current/v1.7-adversarial/`
+- **Tasklist Path**: `.dev/releases/current/v1.7-adversarial/tasklist-P4.md`
+- **Execution Log Path**: `.dev/releases/current/v1.7-adversarial/execution-log-p4.md`
+- **Checkpoint Reports Path**: `.dev/releases/current/v1.7-adversarial/checkpoints/`
+- **Evidence Root**: `.dev/releases/current/v1.7-adversarial/evidence/`
+- **Artifacts Root**: `.dev/releases/current/v1.7-adversarial/artifacts/`
+- **Feedback Log Path**: `.dev/releases/current/v1.7-adversarial/feedback-log.md`
 
 ---
 
@@ -91,51 +91,51 @@
 
 | Deliverable ID | Task ID | Roadmap Item ID(s) | Deliverable (short) | Tier | Verification | Intended Artifact Paths | Effort | Risk |
 |---:|---:|---:|---|---|---|---|---|---|
-| D-0001 | T01.01 | R-001 | adversarial.md command definition | STANDARD | Direct test | `.roadmaps/v1.7.0/artifacts/D-0001/spec.md` | XS | Low |
-| D-0002 | T01.02 | R-002 | SKILL.md behavioral instructions | STANDARD | Direct test | `.roadmaps/v1.7.0/artifacts/D-0002/spec.md` | S | Low |
-| D-0003 | T01.03 | R-003 | debate-orchestrator.md agent definition | STANDARD | Direct test | `.roadmaps/v1.7.0/artifacts/D-0003/spec.md` | S | Low |
-| D-0004 | T01.04 | R-004 | merge-executor.md agent definition | STANDARD | Direct test | `.roadmaps/v1.7.0/artifacts/D-0004/spec.md` | S | Low |
-| D-0005 | T01.05 | R-005 | debate-protocol.md reference doc | STRICT | Sub-agent | `.roadmaps/v1.7.0/artifacts/D-0005/spec.md` | S | Low |
-| D-0006 | T01.05 | R-005 | scoring-protocol.md reference doc | STRICT | Sub-agent | `.roadmaps/v1.7.0/artifacts/D-0006/spec.md` | S | Low |
-| D-0007 | T01.05 | R-005 | agent-specs.md reference doc | STRICT | Sub-agent | `.roadmaps/v1.7.0/artifacts/D-0007/spec.md` | S | Low |
-| D-0008 | T01.05 | R-005 | artifact-templates.md reference doc | STRICT | Sub-agent | `.roadmaps/v1.7.0/artifacts/D-0008/spec.md` | S | Low |
-| D-0009 | T01.06 | R-006 | Sync verification evidence | STANDARD | Direct test | `.roadmaps/v1.7.0/artifacts/D-0009/evidence.md` | XS | Low |
-| D-0010 | T02.01 | R-007 | Input mode parser logic | STANDARD | Direct test | `.roadmaps/v1.7.0/artifacts/D-0010/spec.md` | S | Low |
-| D-0011 | T02.02 | R-008 | Variant loading and normalization logic | STANDARD | Direct test | `.roadmaps/v1.7.0/artifacts/D-0011/spec.md` | XS | Low |
-| D-0012 | T02.03 | R-009 | Structural diff engine | STANDARD | Direct test | `.roadmaps/v1.7.0/artifacts/D-0012/spec.md` | XS | Low |
-| D-0013 | T02.04 | R-010 | Content diff engine | STANDARD | Direct test | `.roadmaps/v1.7.0/artifacts/D-0013/spec.md` | XS | Low |
-| D-0014 | T02.05 | R-011 | Contradiction detection protocol | STANDARD | Direct test | `.roadmaps/v1.7.0/artifacts/D-0014/spec.md` | S | Low |
-| D-0015 | T02.06 | R-012 | Unique contribution extractor | STANDARD | Direct test | `.roadmaps/v1.7.0/artifacts/D-0015/spec.md` | XS | Low |
-| D-0016 | T02.07 | R-013 | diff-analysis.md artifact | STANDARD | Direct test | `.roadmaps/v1.7.0/artifacts/D-0016/spec.md` | XS | Low |
-| D-0017 | T03.01 | R-014 | Advocate agent instantiation logic | STRICT | Sub-agent | `.roadmaps/v1.7.0/artifacts/D-0017/spec.md` | S | Low |
-| D-0018 | T03.02 | R-015 | Round 1 parallel dispatch logic | STANDARD | Direct test | `.roadmaps/v1.7.0/artifacts/D-0018/spec.md` | S | Low |
-| D-0019 | T03.03 | R-016 | Round 2 rebuttal logic | STANDARD | Direct test | `.roadmaps/v1.7.0/artifacts/D-0019/spec.md` | S | Low |
-| D-0020 | T03.04 | R-017 | Round 3 final arguments logic | STANDARD | Direct test | `.roadmaps/v1.7.0/artifacts/D-0020/spec.md` | S | Low |
-| D-0021 | T03.05 | R-018 | Convergence detection algorithm | STANDARD | Direct test | `.roadmaps/v1.7.0/artifacts/D-0021/spec.md` | S | Low |
-| D-0022 | T03.06 | R-019 | Per-point scoring matrix | STANDARD | Direct test | `.roadmaps/v1.7.0/artifacts/D-0022/spec.md` | XS | Low |
-| D-0023 | T03.07 | R-020 | debate-transcript.md artifact | STANDARD | Direct test | `.roadmaps/v1.7.0/artifacts/D-0023/spec.md` | XS | Low |
-| D-0024 | T04.01 | R-021 | Quantitative scoring engine (5 metrics) | STANDARD | Direct test | `.roadmaps/v1.7.0/artifacts/D-0024/spec.md` | S | Low |
-| D-0025 | T04.02 | R-022 | Qualitative rubric engine (25 criteria) | STANDARD | Direct test | `.roadmaps/v1.7.0/artifacts/D-0025/spec.md` | S | Low |
-| D-0026 | T04.03 | R-023 | Position-bias mitigation logic | STANDARD | Direct test | `.roadmaps/v1.7.0/artifacts/D-0026/spec.md` | S | Low |
-| D-0027 | T04.04 | R-024 | Combined scoring formula | STANDARD | Direct test | `.roadmaps/v1.7.0/artifacts/D-0027/spec.md` | XS | Low |
-| D-0028 | T04.05 | R-025 | Tiebreaker protocol | STANDARD | Direct test | `.roadmaps/v1.7.0/artifacts/D-0028/spec.md` | XS | Low |
-| D-0029 | T04.06 | R-026 | base-selection.md artifact | STANDARD | Direct test | `.roadmaps/v1.7.0/artifacts/D-0029/spec.md` | XS | Low |
-| D-0030 | T05.01 | R-027 | Refactoring plan generation logic | STRICT | Sub-agent | `.roadmaps/v1.7.0/artifacts/D-0030/spec.md` | S | Low |
-| D-0031 | T05.02 | R-028 | Interactive mode checkpoint logic | STANDARD | Direct test | `.roadmaps/v1.7.0/artifacts/D-0031/spec.md` | S | Low |
-| D-0032 | T05.03 | R-029 | Merge execution logic | STANDARD | Direct test | `.roadmaps/v1.7.0/artifacts/D-0032/spec.md` | XS | Low |
-| D-0033 | T05.04 | R-030 | Provenance annotation system | STANDARD | Direct test | `.roadmaps/v1.7.0/artifacts/D-0033/spec.md` | S | Low |
-| D-0034 | T05.05 | R-031 | Post-merge validation checks | STANDARD | Direct test | `.roadmaps/v1.7.0/artifacts/D-0034/spec.md` | XS | Low |
-| D-0035 | T05.06 | R-032 | refactor-plan.md artifact template | STANDARD | Direct test | `.roadmaps/v1.7.0/artifacts/D-0035/spec.md` | XS | Low |
-| D-0036 | T05.06 | R-032 | merge-log.md artifact template | STANDARD | Direct test | `.roadmaps/v1.7.0/artifacts/D-0036/spec.md` | XS | Low |
-| D-0037 | T05.07 | R-033 | Return contract implementation | STANDARD | Direct test | `.roadmaps/v1.7.0/artifacts/D-0037/spec.md` | S | Low |
-| D-0038 | T06.01 | R-034 | Error handling matrix | STANDARD | Direct test | `.roadmaps/v1.7.0/artifacts/D-0038/spec.md` | S | Low |
-| D-0039 | T06.02 | R-035 | Mode B variant generation logic | STANDARD | Direct test | `.roadmaps/v1.7.0/artifacts/D-0039/spec.md` | S | Low |
-| D-0040 | T06.03 | R-036 | MCP integration layer | STANDARD | Direct test | `.roadmaps/v1.7.0/artifacts/D-0040/spec.md` | S | Low |
-| D-0041 | T06.04 | R-037 | COMMANDS.md framework update | STRICT | Sub-agent | `.roadmaps/v1.7.0/artifacts/D-0041/spec.md` | XS | Low |
-| D-0042 | T06.04 | R-037 | ORCHESTRATOR.md routing update | STRICT | Sub-agent | `.roadmaps/v1.7.0/artifacts/D-0042/spec.md` | XS | Low |
-| D-0043 | T06.05 | R-038 | E2E Mode A validation results | STANDARD | Direct test | `.roadmaps/v1.7.0/artifacts/D-0043/evidence.md` | S | Low |
-| D-0044 | T06.06 | R-039 | E2E Mode B validation results | STANDARD | Direct test | `.roadmaps/v1.7.0/artifacts/D-0044/evidence.md` | XS | Low |
-| D-0045 | T06.07 | R-040 | Integration documentation | STANDARD | Direct test | `.roadmaps/v1.7.0/artifacts/D-0045/spec.md` | XS | Low |
+| D-0001 | T01.01 | R-001 | adversarial.md command definition | STANDARD | Direct test | `.dev/releases/current/v1.7-adversarial/artifacts/D-0001/spec.md` | XS | Low |
+| D-0002 | T01.02 | R-002 | SKILL.md behavioral instructions | STANDARD | Direct test | `.dev/releases/current/v1.7-adversarial/artifacts/D-0002/spec.md` | S | Low |
+| D-0003 | T01.03 | R-003 | debate-orchestrator.md agent definition | STANDARD | Direct test | `.dev/releases/current/v1.7-adversarial/artifacts/D-0003/spec.md` | S | Low |
+| D-0004 | T01.04 | R-004 | merge-executor.md agent definition | STANDARD | Direct test | `.dev/releases/current/v1.7-adversarial/artifacts/D-0004/spec.md` | S | Low |
+| D-0005 | T01.05 | R-005 | debate-protocol.md reference doc | STRICT | Sub-agent | `.dev/releases/current/v1.7-adversarial/artifacts/D-0005/spec.md` | S | Low |
+| D-0006 | T01.05 | R-005 | scoring-protocol.md reference doc | STRICT | Sub-agent | `.dev/releases/current/v1.7-adversarial/artifacts/D-0006/spec.md` | S | Low |
+| D-0007 | T01.05 | R-005 | agent-specs.md reference doc | STRICT | Sub-agent | `.dev/releases/current/v1.7-adversarial/artifacts/D-0007/spec.md` | S | Low |
+| D-0008 | T01.05 | R-005 | artifact-templates.md reference doc | STRICT | Sub-agent | `.dev/releases/current/v1.7-adversarial/artifacts/D-0008/spec.md` | S | Low |
+| D-0009 | T01.06 | R-006 | Sync verification evidence | STANDARD | Direct test | `.dev/releases/current/v1.7-adversarial/artifacts/D-0009/evidence.md` | XS | Low |
+| D-0010 | T02.01 | R-007 | Input mode parser logic | STANDARD | Direct test | `.dev/releases/current/v1.7-adversarial/artifacts/D-0010/spec.md` | S | Low |
+| D-0011 | T02.02 | R-008 | Variant loading and normalization logic | STANDARD | Direct test | `.dev/releases/current/v1.7-adversarial/artifacts/D-0011/spec.md` | XS | Low |
+| D-0012 | T02.03 | R-009 | Structural diff engine | STANDARD | Direct test | `.dev/releases/current/v1.7-adversarial/artifacts/D-0012/spec.md` | XS | Low |
+| D-0013 | T02.04 | R-010 | Content diff engine | STANDARD | Direct test | `.dev/releases/current/v1.7-adversarial/artifacts/D-0013/spec.md` | XS | Low |
+| D-0014 | T02.05 | R-011 | Contradiction detection protocol | STANDARD | Direct test | `.dev/releases/current/v1.7-adversarial/artifacts/D-0014/spec.md` | S | Low |
+| D-0015 | T02.06 | R-012 | Unique contribution extractor | STANDARD | Direct test | `.dev/releases/current/v1.7-adversarial/artifacts/D-0015/spec.md` | XS | Low |
+| D-0016 | T02.07 | R-013 | diff-analysis.md artifact | STANDARD | Direct test | `.dev/releases/current/v1.7-adversarial/artifacts/D-0016/spec.md` | XS | Low |
+| D-0017 | T03.01 | R-014 | Advocate agent instantiation logic | STRICT | Sub-agent | `.dev/releases/current/v1.7-adversarial/artifacts/D-0017/spec.md` | S | Low |
+| D-0018 | T03.02 | R-015 | Round 1 parallel dispatch logic | STANDARD | Direct test | `.dev/releases/current/v1.7-adversarial/artifacts/D-0018/spec.md` | S | Low |
+| D-0019 | T03.03 | R-016 | Round 2 rebuttal logic | STANDARD | Direct test | `.dev/releases/current/v1.7-adversarial/artifacts/D-0019/spec.md` | S | Low |
+| D-0020 | T03.04 | R-017 | Round 3 final arguments logic | STANDARD | Direct test | `.dev/releases/current/v1.7-adversarial/artifacts/D-0020/spec.md` | S | Low |
+| D-0021 | T03.05 | R-018 | Convergence detection algorithm | STANDARD | Direct test | `.dev/releases/current/v1.7-adversarial/artifacts/D-0021/spec.md` | S | Low |
+| D-0022 | T03.06 | R-019 | Per-point scoring matrix | STANDARD | Direct test | `.dev/releases/current/v1.7-adversarial/artifacts/D-0022/spec.md` | XS | Low |
+| D-0023 | T03.07 | R-020 | debate-transcript.md artifact | STANDARD | Direct test | `.dev/releases/current/v1.7-adversarial/artifacts/D-0023/spec.md` | XS | Low |
+| D-0024 | T04.01 | R-021 | Quantitative scoring engine (5 metrics) | STANDARD | Direct test | `.dev/releases/current/v1.7-adversarial/artifacts/D-0024/spec.md` | S | Low |
+| D-0025 | T04.02 | R-022 | Qualitative rubric engine (25 criteria) | STANDARD | Direct test | `.dev/releases/current/v1.7-adversarial/artifacts/D-0025/spec.md` | S | Low |
+| D-0026 | T04.03 | R-023 | Position-bias mitigation logic | STANDARD | Direct test | `.dev/releases/current/v1.7-adversarial/artifacts/D-0026/spec.md` | S | Low |
+| D-0027 | T04.04 | R-024 | Combined scoring formula | STANDARD | Direct test | `.dev/releases/current/v1.7-adversarial/artifacts/D-0027/spec.md` | XS | Low |
+| D-0028 | T04.05 | R-025 | Tiebreaker protocol | STANDARD | Direct test | `.dev/releases/current/v1.7-adversarial/artifacts/D-0028/spec.md` | XS | Low |
+| D-0029 | T04.06 | R-026 | base-selection.md artifact | STANDARD | Direct test | `.dev/releases/current/v1.7-adversarial/artifacts/D-0029/spec.md` | XS | Low |
+| D-0030 | T05.01 | R-027 | Refactoring plan generation logic | STRICT | Sub-agent | `.dev/releases/current/v1.7-adversarial/artifacts/D-0030/spec.md` | S | Low |
+| D-0031 | T05.02 | R-028 | Interactive mode checkpoint logic | STANDARD | Direct test | `.dev/releases/current/v1.7-adversarial/artifacts/D-0031/spec.md` | S | Low |
+| D-0032 | T05.03 | R-029 | Merge execution logic | STANDARD | Direct test | `.dev/releases/current/v1.7-adversarial/artifacts/D-0032/spec.md` | XS | Low |
+| D-0033 | T05.04 | R-030 | Provenance annotation system | STANDARD | Direct test | `.dev/releases/current/v1.7-adversarial/artifacts/D-0033/spec.md` | S | Low |
+| D-0034 | T05.05 | R-031 | Post-merge validation checks | STANDARD | Direct test | `.dev/releases/current/v1.7-adversarial/artifacts/D-0034/spec.md` | XS | Low |
+| D-0035 | T05.06 | R-032 | refactor-plan.md artifact template | STANDARD | Direct test | `.dev/releases/current/v1.7-adversarial/artifacts/D-0035/spec.md` | XS | Low |
+| D-0036 | T05.06 | R-032 | merge-log.md artifact template | STANDARD | Direct test | `.dev/releases/current/v1.7-adversarial/artifacts/D-0036/spec.md` | XS | Low |
+| D-0037 | T05.07 | R-033 | Return contract implementation | STANDARD | Direct test | `.dev/releases/current/v1.7-adversarial/artifacts/D-0037/spec.md` | S | Low |
+| D-0038 | T06.01 | R-034 | Error handling matrix | STANDARD | Direct test | `.dev/releases/current/v1.7-adversarial/artifacts/D-0038/spec.md` | S | Low |
+| D-0039 | T06.02 | R-035 | Mode B variant generation logic | STANDARD | Direct test | `.dev/releases/current/v1.7-adversarial/artifacts/D-0039/spec.md` | S | Low |
+| D-0040 | T06.03 | R-036 | MCP integration layer | STANDARD | Direct test | `.dev/releases/current/v1.7-adversarial/artifacts/D-0040/spec.md` | S | Low |
+| D-0041 | T06.04 | R-037 | COMMANDS.md framework update | STRICT | Sub-agent | `.dev/releases/current/v1.7-adversarial/artifacts/D-0041/spec.md` | XS | Low |
+| D-0042 | T06.04 | R-037 | ORCHESTRATOR.md routing update | STRICT | Sub-agent | `.dev/releases/current/v1.7-adversarial/artifacts/D-0042/spec.md` | XS | Low |
+| D-0043 | T06.05 | R-038 | E2E Mode A validation results | STANDARD | Direct test | `.dev/releases/current/v1.7-adversarial/artifacts/D-0043/evidence.md` | S | Low |
+| D-0044 | T06.06 | R-039 | E2E Mode B validation results | STANDARD | Direct test | `.dev/releases/current/v1.7-adversarial/artifacts/D-0044/evidence.md` | XS | Low |
+| D-0045 | T06.07 | R-040 | Integration documentation | STANDARD | Direct test | `.dev/releases/current/v1.7-adversarial/artifacts/D-0045/spec.md` | XS | Low |
 
 ---
 
@@ -149,364 +149,6 @@
 | 4 | Hybrid Scoring & Base Selection | T04.01–T04.06 | Step 3 produces base-selection.md with scoring | STRICT: 0, STANDARD: 6, LIGHT: 0, EXEMPT: 0 |
 | 5 | Refactoring Plan & Merge Execution | T05.01–T05.07 | Steps 4-5 produce merged output with provenance | STRICT: 1, STANDARD: 6, LIGHT: 0, EXEMPT: 0 |
 | 6 | Integration, Polish & Validation | T06.01–T06.07 | Full pipeline validated E2E in both modes | STRICT: 1, STANDARD: 6, LIGHT: 0, EXEMPT: 0 |
-
----
-
-## Phase 3: Adversarial Debate Protocol
-
-Implement Step 2 — structured multi-agent debate with configurable depth and convergence detection. This is the core complexity of the pipeline.
-
-### T03.01 — Implement advocate agent instantiation
-
-**Roadmap Item ID(s):** R-014
-**Why:** Advocate agents are dynamically created from the `--agents` specification; their prompts must encode steelman behavior and persona-specific perspectives.
-**Effort:** `S`
-**Risk:** `Low`
-**Risk Drivers:** None matched
-**Tier:** `STRICT`
-**Confidence:** `[████████--] 72%`
-**Requires Confirmation:** No
-**Critical Path Override:** No
-**Verification Method:** Sub-agent (quality-engineer)
-**MCP Requirements:** Required: Sequential, Serena | Preferred: Context7
-**Fallback Allowed:** No
-**Sub-Agent Delegation:** Recommended
-**Deliverable IDs:** D-0017
-**Artifacts (Intended Paths):**
-- `.roadmaps/v1.7.0/artifacts/D-0017/spec.md`
-
-**Deliverables:**
-1. Advocate agent instantiation logic — parses `model[:persona[:"instruction"]]` format, generates Task agent prompts with steelman instructions, persona activation, and variant assignment
-
-**Steps:**
-1. **[PLANNING]** Review spec Section 5.3 advocate agent behavior and Section 6.2 agent specification format
-2. **[PLANNING]** Design prompt template incorporating steelman protocol, persona behavior, and custom instructions
-3. **[EXECUTION]** Implement agent spec parser: extract model, optional persona, optional instruction string
-4. **[EXECUTION]** Implement prompt generator: combine steelman template + persona activation + diff-analysis context + variant assignment
-5. **[EXECUTION]** Implement Task agent dispatch configuration: model selection, max_turns, subagent_type mapping
-6. **[VERIFICATION]** Test with: `opus`, `opus:architect`, `opus:architect:"focus on scalability"` — verify correct parsing and prompt generation
-7. **[COMPLETION]** Agent instantiation logic documented and integrated
-
-**Acceptance Criteria:**
-- All 3 agent spec formats parsed correctly (model, model:persona, model:persona:"instruction")
-- Steelman protocol encoded in advocate prompts per spec Section 5.3
-- 2-10 agents supported without degradation
-- Each advocate receives their variant, all other variants, and diff-analysis.md
-
-**Validation:**
-- Manual check: Instantiate 3 advocates with different specs, verify prompt content
-- Evidence: Generated prompts contain steelman instructions and correct variant assignments
-
-**Dependencies:** T02.07 (requires diff-analysis.md)
-**Rollback:** Revert instantiation logic
-**Notes:** Tier conflict: "model" keyword triggers STRICT (data model), but context is LLM model. Resolved to STRICT by priority rule (STRICT > STANDARD). Semantic intent is STANDARD.
-
----
-
-### T03.02 — Implement Round 1 parallel advocate statements
-
-**Roadmap Item ID(s):** R-015
-**Why:** Round 1 generates independent advocate positions in parallel — the foundation for all subsequent debate.
-**Effort:** `S`
-**Risk:** `Low`
-**Risk Drivers:** None matched
-**Tier:** `STANDARD`
-**Confidence:** `[██████████] 75%`
-**Requires Confirmation:** No
-**Critical Path Override:** No
-**Verification Method:** Direct test execution
-**MCP Requirements:** Preferred: Sequential, Context7
-**Fallback Allowed:** Yes
-**Sub-Agent Delegation:** None
-**Deliverable IDs:** D-0018
-**Artifacts (Intended Paths):**
-- `.roadmaps/v1.7.0/artifacts/D-0018/spec.md`
-
-**Deliverables:**
-1. Round 1 parallel dispatch logic — spawns all advocate Task agents simultaneously; each produces: claimed strengths with evidence, identified weaknesses of other variants with evidence
-
-**Steps:**
-1. **[PLANNING]** Review spec FR-002 Step 2 Round 1 requirements
-2. **[PLANNING]** Design parallel dispatch pattern using Task tool with run_in_background
-3. **[EXECUTION]** Implement parallel dispatch: spawn N advocate agents simultaneously via Task tool
-4. **[EXECUTION]** Implement response collection: wait for all agents, collect advocate statements
-5. **[EXECUTION]** Implement failure handling: if agent fails, retry once, then proceed with N-1 (per FR-006)
-6. **[VERIFICATION]** Test with 2 advocates running in parallel, verify both produce statements
-7. **[COMPLETION]** Round 1 logic integrated into debate protocol
-
-**Acceptance Criteria:**
-- All advocate agents dispatched simultaneously (parallel execution)
-- Each advocate produces strengths and weaknesses sections with evidence
-- Agent failure handled per FR-006 (retry once, then N-1 fallback, minimum 2)
-- Collected statements structured for Round 2 consumption
-
-**Validation:**
-- Manual check: Run 2 advocates in parallel, verify both produce well-formed statements
-- Evidence: Round 1 transcript section contains advocate positions for all participants
-
-**Dependencies:** T03.01
-**Rollback:** Revert dispatch logic
-**Notes:** —
-
----
-
-### T03.03 — Implement Round 2 sequential rebuttals
-
-**Roadmap Item ID(s):** R-016
-**Why:** Rebuttals address criticisms with counter-evidence, creating genuine adversarial pressure that improves merge quality.
-**Effort:** `S`
-**Risk:** `Low`
-**Risk Drivers:** None matched
-**Tier:** `STANDARD`
-**Confidence:** `[██████████] 75%`
-**Requires Confirmation:** No
-**Critical Path Override:** No
-**Verification Method:** Direct test execution
-**MCP Requirements:** Preferred: Sequential, Context7
-**Fallback Allowed:** Yes
-**Sub-Agent Delegation:** None
-**Deliverable IDs:** D-0019
-**Artifacts (Intended Paths):**
-- `.roadmaps/v1.7.0/artifacts/D-0019/spec.md`
-
-**Deliverables:**
-1. Round 2 rebuttal logic — each advocate sequentially receives Round 1 transcript, addresses criticisms with counter-evidence; only executes for `--depth standard|deep`
-
-**Steps:**
-1. **[PLANNING]** Review spec FR-002 Step 2 Round 2 requirements and depth flag behavior
-2. **[PLANNING]** Design sequential dispatch pattern: each advocate sees full Round 1 transcript
-3. **[EXECUTION]** Implement depth check: skip Round 2 entirely for `--depth quick`
-4. **[EXECUTION]** Implement sequential rebuttal dispatch: each advocate receives Round 1 transcript + criticisms against their variant
-5. **[VERIFICATION]** Test with `--depth standard` (executes) and `--depth quick` (skips)
-6. **[COMPLETION]** Round 2 logic integrated into debate protocol
-
-**Acceptance Criteria:**
-- Round 2 skipped entirely when `--depth quick`
-- Each advocate receives full Round 1 transcript before producing rebuttal
-- Rebuttals specifically address criticisms raised against their variant
-- Sequential execution preserves ordering for transcript
-
-**Validation:**
-- Manual check: Run with `--depth standard`, verify rebuttals reference Round 1 criticisms
-- Evidence: Round 2 transcript section contains rebuttals for each advocate
-
-**Dependencies:** T03.02
-**Rollback:** Revert rebuttal logic
-**Notes:** —
-
----
-
-### T03.04 — Implement Round 3 conditional final arguments
-
-**Roadmap Item ID(s):** R-017
-**Why:** Round 3 provides a final opportunity for convergence when `--depth deep` is specified and convergence threshold is not yet met.
-**Effort:** `S`
-**Risk:** `Low`
-**Risk Drivers:** None matched
-**Tier:** `STANDARD`
-**Confidence:** `[██████████] 75%`
-**Requires Confirmation:** No
-**Critical Path Override:** No
-**Verification Method:** Direct test execution
-**MCP Requirements:** Preferred: Sequential, Context7
-**Fallback Allowed:** Yes
-**Sub-Agent Delegation:** None
-**Deliverable IDs:** D-0020
-**Artifacts (Intended Paths):**
-- `.roadmaps/v1.7.0/artifacts/D-0020/spec.md`
-
-**Deliverables:**
-1. Round 3 conditional logic — executes only if `--depth deep` AND convergence < threshold after Round 2; advocates produce final positions considering all prior rounds
-
-**Steps:**
-1. **[PLANNING]** Review spec FR-002 Step 2 Round 3 requirements and convergence threshold
-2. **[PLANNING]** Design conditional execution: check depth flag AND convergence status
-3. **[EXECUTION]** Implement convergence check gate: if convergence ≥ threshold, skip Round 3
-4. **[EXECUTION]** Implement final arguments dispatch with full Round 1+2 transcript context
-5. **[VERIFICATION]** Test with `--depth deep` + low convergence (executes) and `--depth deep` + high convergence (skips)
-6. **[COMPLETION]** Round 3 logic integrated into debate protocol
-
-**Acceptance Criteria:**
-- Round 3 executes only when `--depth deep` AND convergence < configured threshold
-- Round 3 skipped if convergence already met (with log message)
-- Advocates receive full Round 1+2 context
-- Final positions incorporate learnings from prior rounds
-
-**Validation:**
-- Manual check: Test both conditional paths (execute and skip)
-- Evidence: Round 3 transcript present when triggered, absent when not
-
-**Dependencies:** T03.03, T03.05
-**Rollback:** Revert conditional logic
-**Notes:** —
-
----
-
-### T03.05 — Implement convergence detection
-
-**Roadmap Item ID(s):** R-018
-**Why:** Convergence tracking determines when debate can stop early and feeds the Round 3 conditional gate.
-**Effort:** `S`
-**Risk:** `Low`
-**Risk Drivers:** None matched
-**Tier:** `STANDARD`
-**Confidence:** `[██████████] 75%`
-**Requires Confirmation:** No
-**Critical Path Override:** No
-**Verification Method:** Direct test execution
-**MCP Requirements:** Preferred: Sequential, Context7
-**Fallback Allowed:** Yes
-**Sub-Agent Delegation:** None
-**Deliverable IDs:** D-0021
-**Artifacts (Intended Paths):**
-- `.roadmaps/v1.7.0/artifacts/D-0021/spec.md`
-
-**Deliverables:**
-1. Convergence detection algorithm — tracks per-diff-point agreement percentage; supports configurable threshold (default 80%); implements early termination (unanimous agreement, stable 80%+ majority for 2 rounds, position oscillation detection)
-
-**Steps:**
-1. **[PLANNING]** Review spec FR-002 convergence measurement and FR-003 `--convergence` flag
-2. **[PLANNING]** Design tracking data structure: per-point agreement, round-over-round stability, oscillation detection
-3. **[EXECUTION]** Implement per-point agreement tracker: for each diff point, determine if advocates agree on superior approach
-4. **[EXECUTION]** Implement early termination conditions: unanimous, stable majority (2 rounds), max rounds, oscillation
-5. **[VERIFICATION]** Test with scenarios: high convergence (terminate early), low convergence (continue), oscillation (terminate with flag)
-6. **[COMPLETION]** Convergence detection integrated into debate protocol
-
-**Acceptance Criteria:**
-- Convergence percentage computed accurately per round
-- Configurable threshold via `--convergence` flag (default 0.80, range 0.50-0.99)
-- All 4 early termination conditions implemented: unanimous, stable majority, max rounds, oscillation
-- Convergence status reported in debate transcript metadata
-
-**Validation:**
-- Manual check: Test convergence calculation with known agreement patterns
-- Evidence: Convergence assessment section in debate transcript matches expected values
-
-**Dependencies:** T03.02 (needs Round 1 data for initial measurement)
-**Rollback:** Revert convergence logic
-**Notes:** —
-
----
-
-### Checkpoint: Phase 3 / Tasks T03.01–T03.05
-
-**Purpose:** Verify debate protocol core components before transcript generation.
-**Checkpoint Report Path:** `.roadmaps/v1.7.0/checkpoints/CP-P03-T01-T05.md`
-**Verification:**
-- Advocate agents instantiate correctly from spec format
-- Rounds 1-3 execute with correct conditional logic per `--depth` flag
-- Convergence detection produces accurate percentages
-**Exit Criteria:**
-- Debate protocol executes all configured rounds without errors
-- Convergence detection triggers early termination correctly
-- Agent failure handling works per FR-006
-
----
-
-### T03.06 — Implement per-point scoring matrix
-
-**Roadmap Item ID(s):** R-019
-**Why:** The scoring matrix records debate outcomes per diff point, providing evidence for base selection in Phase 4.
-**Effort:** `XS`
-**Risk:** `Low`
-**Risk Drivers:** None matched
-**Tier:** `STANDARD`
-**Confidence:** `[██████████] 75%`
-**Requires Confirmation:** No
-**Critical Path Override:** No
-**Verification Method:** Direct test execution
-**MCP Requirements:** Preferred: Sequential
-**Fallback Allowed:** Yes
-**Sub-Agent Delegation:** None
-**Deliverable IDs:** D-0022
-**Artifacts (Intended Paths):**
-- `.roadmaps/v1.7.0/artifacts/D-0022/spec.md`
-
-**Deliverables:**
-1. Per-point scoring matrix — for each diff point, records: winner variant, confidence percentage, evidence summary
-
-**Steps:**
-1. **[PLANNING]** Review spec Section 8.2 scoring matrix format
-2. **[PLANNING]** Design scoring logic: per-point winner determination from debate positions
-3. **[EXECUTION]** Implement scoring: analyze advocate positions per diff point, determine winner and confidence
-4. **[EXECUTION]** Format as table matching spec Section 8.2
-5. **[VERIFICATION]** Verify scoring matrix entries match debate content
-6. **[COMPLETION]** Scoring matrix integrated into debate transcript
-
-**Acceptance Criteria:**
-- Every diff point from diff-analysis.md has a corresponding scoring entry
-- Winner, confidence percentage, and evidence summary populated for each
-- Table format matches spec Section 8.2
-- Confidence values are calibrated (not all 50% or all 100%)
-
-**Validation:**
-- Manual check: Verify scoring matrix entries are consistent with debate arguments
-- Evidence: Complete scoring matrix with all diff points covered
-
-**Dependencies:** T03.02, T03.03 (needs debate content)
-**Rollback:** Revert scoring logic
-**Notes:** —
-
----
-
-### T03.07 — Generate debate-transcript.md artifact
-
-**Roadmap Item ID(s):** R-020
-**Why:** The debate transcript is the primary evidence artifact consumed by scoring (Phase 4) and refactoring (Phase 5).
-**Effort:** `XS`
-**Risk:** `Low`
-**Risk Drivers:** None matched
-**Tier:** `STANDARD`
-**Confidence:** `[██████████] 75%`
-**Requires Confirmation:** No
-**Critical Path Override:** No
-**Verification Method:** Direct test execution
-**MCP Requirements:** Preferred: Context7
-**Fallback Allowed:** Yes
-**Sub-Agent Delegation:** None
-**Deliverable IDs:** D-0023
-**Artifacts (Intended Paths):**
-- `.roadmaps/v1.7.0/artifacts/D-0023/spec.md`
-
-**Deliverables:**
-1. debate-transcript.md artifact — metadata, round transcripts (1-3), scoring matrix, convergence assessment; per spec Section 8.2
-
-**Steps:**
-1. **[PLANNING]** Review spec Section 8.2 full artifact template
-2. **[PLANNING]** Identify assembly order: metadata → rounds → scoring matrix → convergence assessment
-3. **[EXECUTION]** Assemble transcript from round outputs and scoring matrix
-4. **[EXECUTION]** Add metadata: depth, rounds completed, convergence percentage, focus areas
-5. **[VERIFICATION]** Verify assembled artifact matches spec Section 8.2 template
-6. **[COMPLETION]** debate-transcript.md written to `<output-dir>/adversarial/debate-transcript.md`
-
-**Acceptance Criteria:**
-- Artifact contains metadata, all completed rounds, scoring matrix, and convergence assessment
-- Metadata accurately reflects configured depth and actual rounds completed
-- Format matches spec Section 8.2 template
-- File written to correct output path per FR-005
-
-**Validation:**
-- Manual check: Inspect assembled transcript for completeness against spec Section 8.2
-- Evidence: debate-transcript.md produced with all sections populated
-
-**Dependencies:** T03.02, T03.03, T03.04, T03.05, T03.06
-**Rollback:** Delete generated artifact
-**Notes:** —
-
----
-
-### Checkpoint: End of Phase 3
-
-**Purpose:** Gate check — debate protocol must produce valid transcript before scoring phase begins.
-**Checkpoint Report Path:** `.roadmaps/v1.7.0/checkpoints/CP-P03-END.md`
-**Verification:**
-- debate-transcript.md produced with all required sections
-- Scoring matrix covers all diff points
-- Convergence assessment is accurate
-**Exit Criteria:**
-- Phase 3 deliverables D-0017 through D-0023 all produced
-- Debate protocol tested at all 3 depth levels (quick/standard/deep)
-- Ready to begin Phase 4 scoring implementation
 
 ---
 
@@ -531,7 +173,7 @@ Implement Step 3 — the hybrid quantitative-qualitative scoring protocol from A
 **Sub-Agent Delegation:** None
 **Deliverable IDs:** D-0024
 **Artifacts (Intended Paths):**
-- `.roadmaps/v1.7.0/artifacts/D-0024/spec.md`
+- `.dev/releases/current/v1.7-adversarial/artifacts/D-0024/spec.md`
 
 **Deliverables:**
 1. Quantitative scoring engine — implements 5 deterministic metrics: Requirement Coverage (RC, 0.30), Internal Consistency (IC, 0.25), Specificity Ratio (SR, 0.15), Dependency Completeness (DC, 0.15), Section Coverage (SC, 0.15); all normalized to [0.0, 1.0]
@@ -579,7 +221,7 @@ Implement Step 3 — the hybrid quantitative-qualitative scoring protocol from A
 **Sub-Agent Delegation:** None
 **Deliverable IDs:** D-0025
 **Artifacts (Intended Paths):**
-- `.roadmaps/v1.7.0/artifacts/D-0025/spec.md`
+- `.dev/releases/current/v1.7-adversarial/artifacts/D-0025/spec.md`
 
 **Deliverables:**
 1. Qualitative rubric engine — evaluates variants across 25 binary criteria in 5 dimensions (completeness, correctness, structure, clarity, risk coverage); enforces CEV (Claim-Evidence-Verdict) protocol; qual_score = total_met / 25
@@ -626,7 +268,7 @@ Implement Step 3 — the hybrid quantitative-qualitative scoring protocol from A
 **Sub-Agent Delegation:** None
 **Deliverable IDs:** D-0026
 **Artifacts (Intended Paths):**
-- `.roadmaps/v1.7.0/artifacts/D-0026/spec.md`
+- `.dev/releases/current/v1.7-adversarial/artifacts/D-0026/spec.md`
 
 **Deliverables:**
 1. Position-bias mitigation logic — dual-pass qualitative evaluation (forward + reverse variant order); disagreement detection and re-evaluation with comparison prompt
@@ -673,7 +315,7 @@ Implement Step 3 — the hybrid quantitative-qualitative scoring protocol from A
 **Sub-Agent Delegation:** None
 **Deliverable IDs:** D-0027
 **Artifacts (Intended Paths):**
-- `.roadmaps/v1.7.0/artifacts/D-0027/spec.md`
+- `.dev/releases/current/v1.7-adversarial/artifacts/D-0027/spec.md`
 
 **Deliverables:**
 1. Combined scoring formula — `variant_score = (0.50 × quant_score) + (0.50 × qual_score)`; select highest-scoring variant as base
@@ -719,7 +361,7 @@ Implement Step 3 — the hybrid quantitative-qualitative scoring protocol from A
 **Sub-Agent Delegation:** None
 **Deliverable IDs:** D-0028
 **Artifacts (Intended Paths):**
-- `.roadmaps/v1.7.0/artifacts/D-0028/spec.md`
+- `.dev/releases/current/v1.7-adversarial/artifacts/D-0028/spec.md`
 
 **Deliverables:**
 1. Tiebreaker protocol — 3-level cascade: (1) debate performance (diff points won), (2) correctness criteria count, (3) input order
@@ -752,7 +394,7 @@ Implement Step 3 — the hybrid quantitative-qualitative scoring protocol from A
 ### Checkpoint: Phase 4 / Tasks T04.01–T04.05
 
 **Purpose:** Verify scoring engine produces correct, deterministic results before artifact generation.
-**Checkpoint Report Path:** `.roadmaps/v1.7.0/checkpoints/CP-P04-T01-T05.md`
+**Checkpoint Report Path:** `.dev/releases/current/v1.7-adversarial/checkpoints/CP-P04-T01-T05.md`
 **Verification:**
 - Quantitative scores are deterministic (run twice → identical)
 - Qualitative scores enforce CEV protocol (no evidence → NOT MET)
@@ -781,7 +423,7 @@ Implement Step 3 — the hybrid quantitative-qualitative scoring protocol from A
 **Sub-Agent Delegation:** None
 **Deliverable IDs:** D-0029
 **Artifacts (Intended Paths):**
-- `.roadmaps/v1.7.0/artifacts/D-0029/spec.md`
+- `.dev/releases/current/v1.7-adversarial/artifacts/D-0029/spec.md`
 
 **Deliverables:**
 1. base-selection.md artifact — quantitative scoring table, qualitative rubric tables (per dimension), combined scoring matrix, tiebreaker (if applied), selection rationale with evidence; per spec Section 8.3
@@ -813,7 +455,7 @@ Implement Step 3 — the hybrid quantitative-qualitative scoring protocol from A
 ### Checkpoint: End of Phase 4
 
 **Purpose:** Gate check — scoring and base selection must be complete and evidence-backed before merge phase begins.
-**Checkpoint Report Path:** `.roadmaps/v1.7.0/checkpoints/CP-P04-END.md`
+**Checkpoint Report Path:** `.dev/releases/current/v1.7-adversarial/checkpoints/CP-P04-END.md`
 **Verification:**
 - base-selection.md produced with complete scoring breakdown
 - Quantitative scores are deterministic (verified by running twice)
@@ -846,7 +488,7 @@ Implement Steps 4-5 — generate a merge plan from debate outcomes, execute it t
 **Sub-Agent Delegation:** Recommended
 **Deliverable IDs:** D-0030
 **Artifacts (Intended Paths):**
-- `.roadmaps/v1.7.0/artifacts/D-0030/spec.md`
+- `.dev/releases/current/v1.7-adversarial/artifacts/D-0030/spec.md`
 
 **Deliverables:**
 1. Refactoring plan generation logic — for each non-base strength: improvement description, integration point, risk, merge approach; for each base weakness: referenced fix from non-base variant
@@ -893,7 +535,7 @@ Implement Steps 4-5 — generate a merge plan from debate outcomes, execute it t
 **Sub-Agent Delegation:** None
 **Deliverable IDs:** D-0031
 **Artifacts (Intended Paths):**
-- `.roadmaps/v1.7.0/artifacts/D-0031/spec.md`
+- `.dev/releases/current/v1.7-adversarial/artifacts/D-0031/spec.md`
 
 **Deliverables:**
 1. Interactive mode checkpoint logic — 4 pause points (after diff analysis, after debate, after base selection, after refactoring plan) using AskUserQuestion; default non-interactive (auto-approve)
@@ -941,7 +583,7 @@ Implement Steps 4-5 — generate a merge plan from debate outcomes, execute it t
 **Sub-Agent Delegation:** None
 **Deliverable IDs:** D-0032
 **Artifacts (Intended Paths):**
-- `.roadmaps/v1.7.0/artifacts/D-0032/spec.md`
+- `.dev/releases/current/v1.7-adversarial/artifacts/D-0032/spec.md`
 
 **Deliverables:**
 1. Merge execution logic — dispatches merge-executor agent (T01.04) via Task tool with base variant + refactoring plan; agent applies each change methodically and maintains structural integrity
@@ -987,7 +629,7 @@ Implement Steps 4-5 — generate a merge plan from debate outcomes, execute it t
 **Sub-Agent Delegation:** None
 **Deliverable IDs:** D-0033
 **Artifacts (Intended Paths):**
-- `.roadmaps/v1.7.0/artifacts/D-0033/spec.md`
+- `.dev/releases/current/v1.7-adversarial/artifacts/D-0033/spec.md`
 
 **Deliverables:**
 1. Provenance annotation system — HTML comments in merged output: `<!-- Source: Variant N, Section X.Y -->` for each section with non-base origin
@@ -1033,7 +675,7 @@ Implement Steps 4-5 — generate a merge plan from debate outcomes, execute it t
 **Sub-Agent Delegation:** None
 **Deliverable IDs:** D-0034
 **Artifacts (Intended Paths):**
-- `.roadmaps/v1.7.0/artifacts/D-0034/spec.md`
+- `.dev/releases/current/v1.7-adversarial/artifacts/D-0034/spec.md`
 
 **Deliverables:**
 1. Post-merge validation checks — structural integrity (valid headings, no orphaned sections), internal reference resolution, contradiction re-scan
@@ -1066,7 +708,7 @@ Implement Steps 4-5 — generate a merge plan from debate outcomes, execute it t
 ### Checkpoint: Phase 5 / Tasks T05.01–T05.05
 
 **Purpose:** Verify merge pipeline produces valid output before artifact generation and contract implementation.
-**Checkpoint Report Path:** `.roadmaps/v1.7.0/checkpoints/CP-P05-T01-T05.md`
+**Checkpoint Report Path:** `.dev/releases/current/v1.7-adversarial/checkpoints/CP-P05-T01-T05.md`
 **Verification:**
 - Refactoring plan covers all identified strengths and weaknesses
 - Merge executor produces structurally valid output
@@ -1095,8 +737,8 @@ Implement Steps 4-5 — generate a merge plan from debate outcomes, execute it t
 **Sub-Agent Delegation:** None
 **Deliverable IDs:** D-0035, D-0036
 **Artifacts (Intended Paths):**
-- `.roadmaps/v1.7.0/artifacts/D-0035/spec.md`
-- `.roadmaps/v1.7.0/artifacts/D-0036/spec.md`
+- `.dev/releases/current/v1.7-adversarial/artifacts/D-0035/spec.md`
+- `.dev/releases/current/v1.7-adversarial/artifacts/D-0036/spec.md`
 
 **Deliverables:**
 1. refactor-plan.md — per spec Section 8.4 template: overview, planned changes with rationale, changes not made, review status
@@ -1143,7 +785,7 @@ Implement Steps 4-5 — generate a merge plan from debate outcomes, execute it t
 **Sub-Agent Delegation:** None
 **Deliverable IDs:** D-0037
 **Artifacts (Intended Paths):**
-- `.roadmaps/v1.7.0/artifacts/D-0037/spec.md`
+- `.dev/releases/current/v1.7-adversarial/artifacts/D-0037/spec.md`
 
 **Deliverables:**
 1. Return contract implementation — returns: path to merged output, final convergence score, path to adversarial/ artifacts directory, status (success/partial/failed), list of unresolved conflicts
@@ -1175,7 +817,7 @@ Implement Steps 4-5 — generate a merge plan from debate outcomes, execute it t
 ### Checkpoint: End of Phase 5
 
 **Purpose:** Gate check — merge pipeline must produce complete output before integration phase.
-**Checkpoint Report Path:** `.roadmaps/v1.7.0/checkpoints/CP-P05-END.md`
+**Checkpoint Report Path:** `.dev/releases/current/v1.7-adversarial/checkpoints/CP-P05-END.md`
 **Verification:**
 - Merged output produced with provenance annotations
 - refactor-plan.md and merge-log.md artifacts generated
@@ -1208,7 +850,7 @@ Wire everything together: error handling, Mode B generation, MCP integration, fr
 **Sub-Agent Delegation:** None
 **Deliverable IDs:** D-0038
 **Artifacts (Intended Paths):**
-- `.roadmaps/v1.7.0/artifacts/D-0038/spec.md`
+- `.dev/releases/current/v1.7-adversarial/artifacts/D-0038/spec.md`
 
 **Deliverables:**
 1. Error handling matrix — implements all 5 scenarios from FR-006: agent failure (retry + N-1), similar variants (<10% diff → skip debate), non-convergence (force-select by score), invalid merge (preserve artifacts), single variant (abort with warning)
@@ -1257,7 +899,7 @@ Wire everything together: error handling, Mode B generation, MCP integration, fr
 **Sub-Agent Delegation:** None
 **Deliverable IDs:** D-0039
 **Artifacts (Intended Paths):**
-- `.roadmaps/v1.7.0/artifacts/D-0039/spec.md`
+- `.dev/releases/current/v1.7-adversarial/artifacts/D-0039/spec.md`
 
 **Deliverables:**
 1. Mode B variant generation logic — parallel dispatch of Task agents per `--agents` spec; each agent generates an artifact from `--source` using `--generate` type; outputs saved as `variant-N-<model>-<persona>.md`
@@ -1304,7 +946,7 @@ Wire everything together: error handling, Mode B generation, MCP integration, fr
 **Sub-Agent Delegation:** None
 **Deliverable IDs:** D-0040
 **Artifacts (Intended Paths):**
-- `.roadmaps/v1.7.0/artifacts/D-0040/spec.md`
+- `.dev/releases/current/v1.7-adversarial/artifacts/D-0040/spec.md`
 
 **Deliverables:**
 1. MCP integration layer — Sequential for debate scoring/convergence analysis (Steps 2-4), Serena for memory persistence (Step 5), Context7 for domain pattern validation (Step 5); circuit breaker fallbacks per spec Section 10
@@ -1352,8 +994,8 @@ Wire everything together: error handling, Mode B generation, MCP integration, fr
 **Sub-Agent Delegation:** Recommended
 **Deliverable IDs:** D-0041, D-0042
 **Artifacts (Intended Paths):**
-- `.roadmaps/v1.7.0/artifacts/D-0041/spec.md`
-- `.roadmaps/v1.7.0/artifacts/D-0042/spec.md`
+- `.dev/releases/current/v1.7-adversarial/artifacts/D-0041/spec.md`
+- `.dev/releases/current/v1.7-adversarial/artifacts/D-0042/spec.md`
 
 **Deliverables:**
 1. COMMANDS.md update — add sc:adversarial entry with auto-persona, MCP preferences, tools, flags
@@ -1386,7 +1028,7 @@ Wire everything together: error handling, Mode B generation, MCP integration, fr
 ### Checkpoint: Phase 6 / Tasks T06.01–T06.05 (covers T06.01–T06.04 + T06.05 below)
 
 **Purpose:** Verify all integration components before final E2E validation.
-**Checkpoint Report Path:** `.roadmaps/v1.7.0/checkpoints/CP-P06-T01-T05.md`
+**Checkpoint Report Path:** `.dev/releases/current/v1.7-adversarial/checkpoints/CP-P06-T01-T05.md`
 **Verification:**
 - Error handling covers all 5 FR-006 scenarios
 - Mode B generation produces valid variants
@@ -1415,7 +1057,7 @@ Wire everything together: error handling, Mode B generation, MCP integration, fr
 **Sub-Agent Delegation:** None
 **Deliverable IDs:** D-0043
 **Artifacts (Intended Paths):**
-- `.roadmaps/v1.7.0/artifacts/D-0043/evidence.md`
+- `.dev/releases/current/v1.7-adversarial/artifacts/D-0043/evidence.md`
 
 **Deliverables:**
 1. E2E Mode A validation results — complete pipeline run comparing 2-3 real markdown files; all 6 artifacts produced; return contract valid
@@ -1461,7 +1103,7 @@ Wire everything together: error handling, Mode B generation, MCP integration, fr
 **Sub-Agent Delegation:** None
 **Deliverable IDs:** D-0044
 **Artifacts (Intended Paths):**
-- `.roadmaps/v1.7.0/artifacts/D-0044/evidence.md`
+- `.dev/releases/current/v1.7-adversarial/artifacts/D-0044/evidence.md`
 
 **Deliverables:**
 1. E2E Mode B validation results — complete pipeline run generating 2 variants from a source spec with different model/persona combos; all artifacts produced
@@ -1507,7 +1149,7 @@ Wire everything together: error handling, Mode B generation, MCP integration, fr
 **Sub-Agent Delegation:** None
 **Deliverable IDs:** D-0045
 **Artifacts (Intended Paths):**
-- `.roadmaps/v1.7.0/artifacts/D-0045/spec.md`
+- `.dev/releases/current/v1.7-adversarial/artifacts/D-0045/spec.md`
 
 **Deliverables:**
 1. Integration documentation — sc:roadmap v2 integration pattern (spec Section 7.1), usage examples, flag reference, return contract documentation
@@ -1539,7 +1181,7 @@ Wire everything together: error handling, Mode B generation, MCP integration, fr
 ### Checkpoint: End of Phase 6
 
 **Purpose:** Final gate — confirm complete pipeline is functional, documented, and integrated.
-**Checkpoint Report Path:** `.roadmaps/v1.7.0/checkpoints/CP-P06-END.md`
+**Checkpoint Report Path:** `.dev/releases/current/v1.7-adversarial/checkpoints/CP-P06-END.md`
 **Verification:**
 - E2E Mode A and Mode B both pass with all artifacts produced
 - Error handling tested for all 5 FR-006 scenarios
@@ -1555,58 +1197,58 @@ Wire everything together: error handling, Mode B generation, MCP integration, fr
 
 | Roadmap Item ID | Task ID(s) | Deliverable ID(s) | Tier | Confidence | Artifact Paths (rooted) |
 |---:|---:|---:|---|---|---|
-| R-001 | T01.01 | D-0001 | STANDARD | 75% | `.roadmaps/v1.7.0/artifacts/D-0001/` |
-| R-002 | T01.02 | D-0002 | STANDARD | 75% | `.roadmaps/v1.7.0/artifacts/D-0002/` |
-| R-003 | T01.03 | D-0003 | STANDARD | 75% | `.roadmaps/v1.7.0/artifacts/D-0003/` |
-| R-004 | T01.04 | D-0004 | STANDARD | 75% | `.roadmaps/v1.7.0/artifacts/D-0004/` |
-| R-005 | T01.05 | D-0005, D-0006, D-0007, D-0008 | STRICT | 78% | `.roadmaps/v1.7.0/artifacts/D-0005/` through `D-0008/` |
-| R-006 | T01.06 | D-0009 | STANDARD | 80% | `.roadmaps/v1.7.0/artifacts/D-0009/` |
-| R-007 | T02.01 | D-0010 | STANDARD | 75% | `.roadmaps/v1.7.0/artifacts/D-0010/` |
-| R-008 | T02.02 | D-0011 | STANDARD | 75% | `.roadmaps/v1.7.0/artifacts/D-0011/` |
-| R-009 | T02.03 | D-0012 | STANDARD | 75% | `.roadmaps/v1.7.0/artifacts/D-0012/` |
-| R-010 | T02.04 | D-0013 | STANDARD | 75% | `.roadmaps/v1.7.0/artifacts/D-0013/` |
-| R-011 | T02.05 | D-0014 | STANDARD | 75% | `.roadmaps/v1.7.0/artifacts/D-0014/` |
-| R-012 | T02.06 | D-0015 | STANDARD | 75% | `.roadmaps/v1.7.0/artifacts/D-0015/` |
-| R-013 | T02.07 | D-0016 | STANDARD | 75% | `.roadmaps/v1.7.0/artifacts/D-0016/` |
-| R-014 | T03.01 | D-0017 | STRICT | 72% | `.roadmaps/v1.7.0/artifacts/D-0017/` |
-| R-015 | T03.02 | D-0018 | STANDARD | 75% | `.roadmaps/v1.7.0/artifacts/D-0018/` |
-| R-016 | T03.03 | D-0019 | STANDARD | 75% | `.roadmaps/v1.7.0/artifacts/D-0019/` |
-| R-017 | T03.04 | D-0020 | STANDARD | 75% | `.roadmaps/v1.7.0/artifacts/D-0020/` |
-| R-018 | T03.05 | D-0021 | STANDARD | 75% | `.roadmaps/v1.7.0/artifacts/D-0021/` |
-| R-019 | T03.06 | D-0022 | STANDARD | 75% | `.roadmaps/v1.7.0/artifacts/D-0022/` |
-| R-020 | T03.07 | D-0023 | STANDARD | 75% | `.roadmaps/v1.7.0/artifacts/D-0023/` |
-| R-021 | T04.01 | D-0024 | STANDARD | 75% | `.roadmaps/v1.7.0/artifacts/D-0024/` |
-| R-022 | T04.02 | D-0025 | STANDARD | 75% | `.roadmaps/v1.7.0/artifacts/D-0025/` |
-| R-023 | T04.03 | D-0026 | STANDARD | 75% | `.roadmaps/v1.7.0/artifacts/D-0026/` |
-| R-024 | T04.04 | D-0027 | STANDARD | 80% | `.roadmaps/v1.7.0/artifacts/D-0027/` |
-| R-025 | T04.05 | D-0028 | STANDARD | 80% | `.roadmaps/v1.7.0/artifacts/D-0028/` |
-| R-026 | T04.06 | D-0029 | STANDARD | 75% | `.roadmaps/v1.7.0/artifacts/D-0029/` |
-| R-027 | T05.01 | D-0030 | STRICT | 72% | `.roadmaps/v1.7.0/artifacts/D-0030/` |
-| R-028 | T05.02 | D-0031 | STANDARD | 75% | `.roadmaps/v1.7.0/artifacts/D-0031/` |
-| R-029 | T05.03 | D-0032 | STANDARD | 75% | `.roadmaps/v1.7.0/artifacts/D-0032/` |
-| R-030 | T05.04 | D-0033 | STANDARD | 75% | `.roadmaps/v1.7.0/artifacts/D-0033/` |
-| R-031 | T05.05 | D-0034 | STANDARD | 75% | `.roadmaps/v1.7.0/artifacts/D-0034/` |
-| R-032 | T05.06 | D-0035, D-0036 | STANDARD | 75% | `.roadmaps/v1.7.0/artifacts/D-0035/`, `D-0036/` |
-| R-033 | T05.07 | D-0037 | STANDARD | 75% | `.roadmaps/v1.7.0/artifacts/D-0037/` |
-| R-034 | T06.01 | D-0038 | STANDARD | 75% | `.roadmaps/v1.7.0/artifacts/D-0038/` |
-| R-035 | T06.02 | D-0039 | STANDARD | 75% | `.roadmaps/v1.7.0/artifacts/D-0039/` |
-| R-036 | T06.03 | D-0040 | STANDARD | 75% | `.roadmaps/v1.7.0/artifacts/D-0040/` |
-| R-037 | T06.04 | D-0041, D-0042 | STRICT | 78% | `.roadmaps/v1.7.0/artifacts/D-0041/`, `D-0042/` |
-| R-038 | T06.05 | D-0043 | STANDARD | 75% | `.roadmaps/v1.7.0/artifacts/D-0043/` |
-| R-039 | T06.06 | D-0044 | STANDARD | 75% | `.roadmaps/v1.7.0/artifacts/D-0044/` |
-| R-040 | T06.07 | D-0045 | STANDARD | 80% | `.roadmaps/v1.7.0/artifacts/D-0045/` |
+| R-001 | T01.01 | D-0001 | STANDARD | 75% | `.dev/releases/current/v1.7-adversarial/artifacts/D-0001/` |
+| R-002 | T01.02 | D-0002 | STANDARD | 75% | `.dev/releases/current/v1.7-adversarial/artifacts/D-0002/` |
+| R-003 | T01.03 | D-0003 | STANDARD | 75% | `.dev/releases/current/v1.7-adversarial/artifacts/D-0003/` |
+| R-004 | T01.04 | D-0004 | STANDARD | 75% | `.dev/releases/current/v1.7-adversarial/artifacts/D-0004/` |
+| R-005 | T01.05 | D-0005, D-0006, D-0007, D-0008 | STRICT | 78% | `.dev/releases/current/v1.7-adversarial/artifacts/D-0005/` through `D-0008/` |
+| R-006 | T01.06 | D-0009 | STANDARD | 80% | `.dev/releases/current/v1.7-adversarial/artifacts/D-0009/` |
+| R-007 | T02.01 | D-0010 | STANDARD | 75% | `.dev/releases/current/v1.7-adversarial/artifacts/D-0010/` |
+| R-008 | T02.02 | D-0011 | STANDARD | 75% | `.dev/releases/current/v1.7-adversarial/artifacts/D-0011/` |
+| R-009 | T02.03 | D-0012 | STANDARD | 75% | `.dev/releases/current/v1.7-adversarial/artifacts/D-0012/` |
+| R-010 | T02.04 | D-0013 | STANDARD | 75% | `.dev/releases/current/v1.7-adversarial/artifacts/D-0013/` |
+| R-011 | T02.05 | D-0014 | STANDARD | 75% | `.dev/releases/current/v1.7-adversarial/artifacts/D-0014/` |
+| R-012 | T02.06 | D-0015 | STANDARD | 75% | `.dev/releases/current/v1.7-adversarial/artifacts/D-0015/` |
+| R-013 | T02.07 | D-0016 | STANDARD | 75% | `.dev/releases/current/v1.7-adversarial/artifacts/D-0016/` |
+| R-014 | T03.01 | D-0017 | STRICT | 72% | `.dev/releases/current/v1.7-adversarial/artifacts/D-0017/` |
+| R-015 | T03.02 | D-0018 | STANDARD | 75% | `.dev/releases/current/v1.7-adversarial/artifacts/D-0018/` |
+| R-016 | T03.03 | D-0019 | STANDARD | 75% | `.dev/releases/current/v1.7-adversarial/artifacts/D-0019/` |
+| R-017 | T03.04 | D-0020 | STANDARD | 75% | `.dev/releases/current/v1.7-adversarial/artifacts/D-0020/` |
+| R-018 | T03.05 | D-0021 | STANDARD | 75% | `.dev/releases/current/v1.7-adversarial/artifacts/D-0021/` |
+| R-019 | T03.06 | D-0022 | STANDARD | 75% | `.dev/releases/current/v1.7-adversarial/artifacts/D-0022/` |
+| R-020 | T03.07 | D-0023 | STANDARD | 75% | `.dev/releases/current/v1.7-adversarial/artifacts/D-0023/` |
+| R-021 | T04.01 | D-0024 | STANDARD | 75% | `.dev/releases/current/v1.7-adversarial/artifacts/D-0024/` |
+| R-022 | T04.02 | D-0025 | STANDARD | 75% | `.dev/releases/current/v1.7-adversarial/artifacts/D-0025/` |
+| R-023 | T04.03 | D-0026 | STANDARD | 75% | `.dev/releases/current/v1.7-adversarial/artifacts/D-0026/` |
+| R-024 | T04.04 | D-0027 | STANDARD | 80% | `.dev/releases/current/v1.7-adversarial/artifacts/D-0027/` |
+| R-025 | T04.05 | D-0028 | STANDARD | 80% | `.dev/releases/current/v1.7-adversarial/artifacts/D-0028/` |
+| R-026 | T04.06 | D-0029 | STANDARD | 75% | `.dev/releases/current/v1.7-adversarial/artifacts/D-0029/` |
+| R-027 | T05.01 | D-0030 | STRICT | 72% | `.dev/releases/current/v1.7-adversarial/artifacts/D-0030/` |
+| R-028 | T05.02 | D-0031 | STANDARD | 75% | `.dev/releases/current/v1.7-adversarial/artifacts/D-0031/` |
+| R-029 | T05.03 | D-0032 | STANDARD | 75% | `.dev/releases/current/v1.7-adversarial/artifacts/D-0032/` |
+| R-030 | T05.04 | D-0033 | STANDARD | 75% | `.dev/releases/current/v1.7-adversarial/artifacts/D-0033/` |
+| R-031 | T05.05 | D-0034 | STANDARD | 75% | `.dev/releases/current/v1.7-adversarial/artifacts/D-0034/` |
+| R-032 | T05.06 | D-0035, D-0036 | STANDARD | 75% | `.dev/releases/current/v1.7-adversarial/artifacts/D-0035/`, `D-0036/` |
+| R-033 | T05.07 | D-0037 | STANDARD | 75% | `.dev/releases/current/v1.7-adversarial/artifacts/D-0037/` |
+| R-034 | T06.01 | D-0038 | STANDARD | 75% | `.dev/releases/current/v1.7-adversarial/artifacts/D-0038/` |
+| R-035 | T06.02 | D-0039 | STANDARD | 75% | `.dev/releases/current/v1.7-adversarial/artifacts/D-0039/` |
+| R-036 | T06.03 | D-0040 | STANDARD | 75% | `.dev/releases/current/v1.7-adversarial/artifacts/D-0040/` |
+| R-037 | T06.04 | D-0041, D-0042 | STRICT | 78% | `.dev/releases/current/v1.7-adversarial/artifacts/D-0041/`, `D-0042/` |
+| R-038 | T06.05 | D-0043 | STANDARD | 75% | `.dev/releases/current/v1.7-adversarial/artifacts/D-0043/` |
+| R-039 | T06.06 | D-0044 | STANDARD | 75% | `.dev/releases/current/v1.7-adversarial/artifacts/D-0044/` |
+| R-040 | T06.07 | D-0045 | STANDARD | 80% | `.dev/releases/current/v1.7-adversarial/artifacts/D-0045/` |
 
 ---
 
 ## Execution Log Template
 
-**Intended Path:** `.roadmaps/v1.7.0/execution-log.md`
+**Intended Path:** `.dev/releases/current/v1.7-adversarial/execution-log.md`
 
 | Timestamp (ISO 8601) | Task ID | Tier | Deliverable ID(s) | Action Taken (≤ 12 words) | Validation Run (verbatim cmd or "Manual") | Result (Pass/Fail/TBD) | Evidence Path |
 |---|---:|---|---:|---|---|---|---|
-| | T01.01 | STANDARD | D-0001 | | Manual | TBD | `.roadmaps/v1.7.0/evidence/` |
-| | T01.02 | STANDARD | D-0002 | | Manual | TBD | `.roadmaps/v1.7.0/evidence/` |
-| | T01.06 | STANDARD | D-0009 | | `make sync-dev && make verify-sync` | TBD | `.roadmaps/v1.7.0/evidence/` |
+| | T01.01 | STANDARD | D-0001 | | Manual | TBD | `.dev/releases/current/v1.7-adversarial/evidence/` |
+| | T01.02 | STANDARD | D-0002 | | Manual | TBD | `.dev/releases/current/v1.7-adversarial/evidence/` |
+| | T01.06 | STANDARD | D-0009 | | `make sync-dev && make verify-sync` | TBD | `.dev/releases/current/v1.7-adversarial/evidence/` |
 
 *(Rows for all 40 tasks follow same pattern — populate during execution)*
 
@@ -1618,7 +1260,7 @@ For each checkpoint, execution produces one report using this template:
 
 ```
 # Checkpoint Report — <Checkpoint Title>
-**Checkpoint Report Path:** .roadmaps/v1.7.0/checkpoints/<deterministic-name>.md
+**Checkpoint Report Path:** .dev/releases/current/v1.7-adversarial/checkpoints/<deterministic-name>.md
 **Scope:** <tasks covered>
 
 ## Status
@@ -1638,7 +1280,7 @@ Overall: Pass | Fail | TBD
 - <List blocking issues; reference T##.## and D-####>
 
 ## Evidence
-- .roadmaps/v1.7.0/evidence/<relevant-evidence-files>
+- .dev/releases/current/v1.7-adversarial/evidence/<relevant-evidence-files>
 ```
 
 **Checkpoint reports to generate:**
@@ -1659,7 +1301,7 @@ Overall: Pass | Fail | TBD
 
 ## Feedback Collection Template
 
-**Intended Path:** `.roadmaps/v1.7.0/feedback-log.md`
+**Intended Path:** `.dev/releases/current/v1.7-adversarial/feedback-log.md`
 
 | Task ID | Original Tier | Override Tier | Override Reason (≤ 15 words) | Completion Status | Quality Signal | Time Variance |
 |---:|---|---|---|---|---|---|
