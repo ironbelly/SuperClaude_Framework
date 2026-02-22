@@ -95,13 +95,14 @@ sc:roadmap executes in 5 waves (0-4). Each wave has entry criteria, behavioral i
 **Refs Loaded**: Read `refs/adversarial-integration.md` and follow the invocation patterns for multi-spec mode.
 
 **Behavioral Instructions**:
-1. Invoke sc:adversarial with `--compare` mode on the provided spec files
-2. Handle return contract:
+1. Parse agent specs (if combined mode) using the parsing algorithm from `refs/adversarial-integration.md` "Agent Specification Parsing" section
+2. Invoke sc:adversarial with `--compare` mode per `refs/adversarial-integration.md` "Multi-Spec Consolidation" invocation pattern. Propagate `--interactive` flag if set (see `refs/adversarial-integration.md` "--interactive Flag Propagation" section).
+3. Handle return contract per `refs/adversarial-integration.md` "Return Contract Consumption" section:
    - `status: success` → proceed with `merged_output_path` as spec input for Wave 1B
    - `status: partial` + convergence >= 60% → proceed with warning logged in extraction.md
    - `status: partial` + convergence < 60% → if `--interactive`, prompt user; otherwise abort
    - `status: failed` → abort roadmap generation with error
-3. Apply divergent-specs heuristic: convergence < 50% → emit warning
+4. Apply divergent-specs heuristic: convergence < 50% → emit warning
 
 **Exit Criteria**: Unified spec available. Emit: `"Wave 1A complete: spec consolidation finished (convergence: XX%)."`
 
@@ -128,7 +129,7 @@ sc:roadmap executes in 5 waves (0-4). Each wave has entry criteria, behavioral i
 **Behavioral Instructions**:
 1. Run 4-tier template discovery from `refs/templates.md`: local → user → plugin [future: v5.0] → inline generation
 2. Score template compatibility using the algorithm from `refs/scoring.md`
-3. If `--multi-roadmap`: invoke sc:adversarial for multi-roadmap generation per `refs/adversarial-integration.md`. The adversarial output replaces template-based generation.
+3. If `--multi-roadmap`: parse agent specs using the parsing algorithm from `refs/adversarial-integration.md` "Agent Specification Parsing" section. Expand model-only agents with the primary persona from Wave 1B. If agent count ≥5, orchestrator is added automatically. Invoke sc:adversarial for multi-roadmap generation per `refs/adversarial-integration.md` "Multi-Roadmap Generation" invocation pattern. Handle return contract per `refs/adversarial-integration.md` "Return Contract Consumption" section. The adversarial output replaces template-based generation.
 4. Otherwise: create milestone structure based on complexity class and domain distribution using the milestone count formula, domain mapping, and priority assignment rules from `refs/templates.md`
 5. Map dependencies between milestones using the dependency mapping rules from `refs/templates.md`. Verify no circular dependencies.
 6. Compute effort estimates for each milestone using the effort estimation algorithm from `refs/templates.md`
@@ -165,13 +166,13 @@ sc:roadmap executes in 5 waves (0-4). Each wave has entry criteria, behavioral i
 1. Dispatch quality-engineer agent using the prompt from `refs/validation.md`: completeness, consistency, traceability checks. Additionally validates test-strategy.md against interleave ratio, milestone references, and stop-and-fix thresholds.
 2. Dispatch self-review agent using the 4-question protocol from `refs/validation.md`
 3. Both agents run in **parallel** (independent read-only validators)
-4. Aggregate scores using the formula from `refs/validation.md`: PASS (>=85%) | REVISE (70-84%) | REJECT (<70%)
+4. Aggregate scores using the formula from `refs/validation.md` "Score Aggregation" section: quality-engineer (0.55) + self-review (0.45). Apply thresholds from `refs/validation.md` "Decision Thresholds" section: PASS (>=85%) | REVISE (70-84%) | REJECT (<70%)
 5. If adversarial mode was used: missing adversarial artifacts → REJECT; missing convergence score → REVISE
 6. Write validation score to roadmap.md frontmatter
-7. **REVISE loop** (per FR-017): If 70-84%, re-run Wave 3 → Wave 4 with improvement recommendations. Max 2 iterations. If still REVISE: set `validation_status: PASS_WITH_WARNINGS`
-8. If `--no-validate`: skip entirely, set `validation_status: SKIPPED` and `validation_score: 0.0`
+7. **REVISE loop** (per FR-017): If 70-84%, follow the REVISE loop protocol from `refs/validation.md` "REVISE Loop" section: collect improvement recommendations from both agents, re-run Wave 3 → Wave 4 with recommendations as input. Max 2 iterations. If still REVISE after iteration 2: set `validation_status: PASS_WITH_WARNINGS`
+8. If `--no-validate`: skip entirely per `refs/validation.md` "No-Validate Behavior" section. Set `validation_status: SKIPPED` and `validation_score: 0.0`. No agents are dispatched. Emit: `"Wave 4 skipped: --no-validate flag set."`
 
-**Exit Criteria**: Validation complete. Emit: `"Wave 4 complete: validation score X.XX (STATUS)."`
+**Exit Criteria**: Validation complete. Emit: `"Wave 4 complete: validation score X.XX (STATUS)."` (or skip message if `--no-validate`)
 
 ### Post-Wave: Completion
 
