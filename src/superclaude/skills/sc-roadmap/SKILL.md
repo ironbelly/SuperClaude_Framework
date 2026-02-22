@@ -127,32 +127,35 @@ sc:roadmap executes in 5 waves (0-4). Each wave has entry criteria, behavioral i
 
 **Behavioral Instructions**:
 1. Run 4-tier template discovery from `refs/templates.md`: local → user → plugin [future: v5.0] → inline generation
-2. Score template compatibility using the algorithm from `refs/templates.md`
+2. Score template compatibility using the algorithm from `refs/scoring.md`
 3. If `--multi-roadmap`: invoke sc:adversarial for multi-roadmap generation per `refs/adversarial-integration.md`. The adversarial output replaces template-based generation.
-4. Otherwise: create milestone structure based on complexity class and domain distribution using the milestone count formula and domain mapping from `refs/templates.md`
-5. Map dependencies between milestones
+4. Otherwise: create milestone structure based on complexity class and domain distribution using the milestone count formula, domain mapping, and priority assignment rules from `refs/templates.md`
+5. Map dependencies between milestones using the dependency mapping rules from `refs/templates.md`. Verify no circular dependencies.
+6. Compute effort estimates for each milestone using the effort estimation algorithm from `refs/templates.md`
+7. Record template selection decision in Decision Summary (template name or "inline", compatibility scores, rationale)
 
-**Exit Criteria**: Milestone structure determined. Emit: `"Wave 2 complete: N milestones planned."`
+**Exit Criteria**: Milestone structure with effort estimates determined. Emit: `"Wave 2 complete: N milestones planned."`
 
 ### Wave 3: Generation
 
-**Refs Loaded**: None (uses context already loaded from Waves 1B and 2).
+**Refs Loaded**: None (uses context already loaded from Waves 1B and 2). The body templates and frontmatter schemas are in `refs/templates.md` (loaded in Wave 2).
 
 **Behavioral Instructions**:
-1. **Step 1**: Generate `roadmap.md` with YAML frontmatter (per FR-002 schema) + body (per Section 8.1): Overview, Milestone Summary table, Dependency Graph, per-milestone details (Objective, Deliverables, Dependencies, Risk Assessment), Risk Register, Decision Summary, Success Criteria
-2. **Step 2** (after roadmap.md is complete): Generate `test-strategy.md` with YAML frontmatter + body (per FR-007):
+1. **Step 1**: Generate `roadmap.md` using the YAML frontmatter schema from `refs/templates.md` "roadmap.md Frontmatter" section + body from `refs/templates.md` "roadmap.md Body Template" section. Required body sections: Overview, Milestone Summary table (with Effort column), Dependency Graph, per-milestone details (Objective, Deliverables, Dependencies, Risk Assessment), Risk Register, Decision Summary, Success Criteria. Apply effort estimation algorithm from `refs/templates.md` "Effort Estimation" section.
+2. **Step 2** (after roadmap.md is complete): Generate `test-strategy.md` using the YAML frontmatter schema from `refs/templates.md` "test-strategy.md Frontmatter" section + body from `refs/templates.md` "test-strategy.md Body Template" section:
    - Compute interleave ratio from complexity class (LOW→1:3, MEDIUM→1:2, HIGH→1:1)
    - Reference concrete milestone names from the just-generated roadmap.md
    - Encode continuous parallel validation philosophy
    - Define stop-and-fix thresholds per severity level
-3. **Sequencing constraint**: roadmap.md MUST be fully generated before test-strategy.md begins (test-strategy.md references specific milestone IDs)
+3. **Step 3**: Generate `extraction.md` YAML frontmatter using the schema from `refs/templates.md` "extraction.md Frontmatter" section (body was written in Wave 1B; this step adds/updates frontmatter only)
+4. **Sequencing constraint**: roadmap.md MUST be fully generated before test-strategy.md begins (test-strategy.md references specific milestone IDs)
 
-**Frontmatter rules**:
+**Frontmatter rules** (enforced across all 3 artifacts):
 - Single-spec: use `spec_source: <path>` (never `spec_sources`)
 - Multi-spec: use `spec_sources: [<path1>, <path2>]` (never `spec_source`)
-- Exactly one of these fields present, never both
+- Exactly one of these fields present, never both, never neither
 
-**Exit Criteria**: roadmap.md + test-strategy.md written. Emit: `"Wave 3 complete: roadmap.md + test-strategy.md generated."`
+**Exit Criteria**: roadmap.md + test-strategy.md written, extraction.md frontmatter updated. Emit: `"Wave 3 complete: roadmap.md + test-strategy.md generated."`
 
 ### Wave 4: Validation (Multi-Agent)
 
